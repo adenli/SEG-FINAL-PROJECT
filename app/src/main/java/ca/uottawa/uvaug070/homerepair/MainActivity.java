@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     List<Account> accounts;
     Button buttonCreateHomeOwner;
     Button buttonCreateServiceProvider;
+    EditText username;
+    EditText password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,23 @@ public class MainActivity extends AppCompatActivity {
                 addAccount(Role.SERVICEPROVIDER);
             }
         });
+
+
+        username= (EditText)findViewById(R.id.editTextName);
+        password= (EditText)findViewById(R.id.editTextPassword);
+        Button b1 = (Button) findViewById(R.id.login);
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                login();
+
+            }
+        });
+
+
+
     }
     protected void onStart() {
         super.onStart();
@@ -82,6 +102,40 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Account created", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void login(){
+        Boolean value = null;
+
+        Iterator<Account> iterator = accounts.iterator();
+
+        if (username.getText().toString().equals("aden1")){
+            Toast.makeText(getApplicationContext(), "Successaaaaa!", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+        while (iterator.hasNext()) {
+            Account temp= iterator.next();
+
+            if (((username.getText().toString().equals(temp.getUsername())))&& (password.getText().toString().equals(temp.getPassword()))) {
+
+                value = true;
+                break;
+            }
+        }
+
+
+        if (value == null) {
+            Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
+            // add the welcome script
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
+
+            //add the welcome script
         }
     }
 }
