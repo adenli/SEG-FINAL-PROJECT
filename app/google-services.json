@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "528310035433",
+    "firebase_url": "https://homerepair-193dc.firebaseio.com",
+    "project_id": "homerepair-193dc",
+    "storage_bucket": "homerepair-193dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528310035433:android:0be07cf2886e1ff8",
+        "android_client_info": {
+          "package_name": "ca.uottawa.uvaug070.homerepair"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528310035433-bs231l73veunonf93tu3vjqs22lmvic6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.uottawa.uvaug070.homerepair",
+            "certificate_hash": "f4e39898d5fd9d70c80edef6568ea1d5dc51eb88"
+          }
+        },
+        {
+          "client_id": "528310035433-ovj68cmgt3pcsk59uiulltpihdth3r8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPhXpW57cTJVALghfxCPcCIxJdU6m1uMs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528310035433-ovj68cmgt3pcsk59uiulltpihdth3r8d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
