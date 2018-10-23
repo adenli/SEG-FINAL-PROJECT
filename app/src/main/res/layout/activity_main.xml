@@ -12,10 +12,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username:" />
+            android:text="Username:"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/username"
@@ -25,10 +28,14 @@
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/TextView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password:" />
+            android:text="Password:"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/password"
@@ -43,7 +50,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/createaccount"
+                android:id="@+id/createAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
