@@ -49,9 +49,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 accounts.clear();
+                boolean adminExists = false;
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Account account = postSnapshot.getValue(Account.class);
+                    if(account.getRole() == Role.ADMIN) {
+                        adminExists = true;
+                    }
                     accounts.add(account);
+                }
+                if(!adminExists) {
+                    String id = databaseAccounts.push().getKey();
+                    Account account = new Account("admin", "admin", Role.ADMIN);
+                    databaseAccounts.child(id).setValue(account);
                 }
             }
 
