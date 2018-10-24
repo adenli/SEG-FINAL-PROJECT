@@ -8,7 +8,7 @@
 
     <EditText
         android:id="@+id/welcome_text"
-        android:layout_width="wrap_content"
+        android:layout_width="302dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="427dp"
         android:layout_marginEnd="84dp"
@@ -17,8 +17,7 @@
         android:layout_marginStart="85dp"
         android:layout_marginTop="94dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
+        android:inputType="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,19 +26,19 @@
 
     <EditText
         android:id="@+id/role_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="352dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginLeft="84dp"
-        android:layout_marginRight="85dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="29dp"
+        android:layout_width="323dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="141dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="240dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
+        android:inputType="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
+        app:layout_constraintTop_toBottomOf="@+id/welcome_text"
+        app:layout_constraintVertical_bias="1.0" />
 </android.support.constraint.ConstraintLayout>

@@ -115,18 +115,23 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Successaaaaa!", Toast.LENGTH_SHORT).show();
         }
 
-
-
-
         while (iterator.hasNext()) {
             Account temp= iterator.next();
-
+            Toast.makeText(getApplicationContext(), temp.getUsername(), Toast.LENGTH_SHORT).show();
             if (((username.getText().toString().equals(temp.getUsername())))&& (password.getText().toString().equals(temp.getPassword()))) {
                 value = false;
                 Intent intent = new Intent(getApplicationContext(),WelcomeActivity.class);
                 Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
-                intent.putExtra("username",username.toString());
-                intent.putExtra("role",temp.getRole());
+                intent.putExtra("username",temp.getUsername());
+                String role;
+                if (temp.getRole().equals(Role.ADMIN)){
+                    role="Admin";
+                }else if(temp.getRole().equals(Role.HOMEOWNER)){
+                    role="HomeOwner";
+                }else{
+                    role="ServiceProvider";
+                }
+                intent.putExtra("role",role);
                 startActivity(intent);
                 return;
             }
