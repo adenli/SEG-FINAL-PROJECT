@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -15,7 +16,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setWelcome(intent.getStringExtra("username"),intent.getStringExtra("role"));
     }
     private void setWelcome(String username,String role){
-        ((EditText)findViewById(R.id.welcome_text)).setText("Welcome "+username+"!");
-        ((EditText)findViewById(R.id.role_message)).setText("You are logged as "+role+".");
+        ((TextView)findViewById(R.id.welcome_text)).setText("Welcome "+username+"!");
+        ((TextView)findViewById(R.id.role_message)).setText("You are logged as "+role+".");
     }
 }
