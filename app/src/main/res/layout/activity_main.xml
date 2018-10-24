@@ -63,6 +63,12 @@
                 android:layout_weight="1"
                 android:text="Create Home Owner" />
 
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
             <Button
                 android:id="@+id/createServiceProvider"
                 style="@style/Widget.AppCompat.Button.Borderless"
@@ -70,6 +76,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Create Service Provider" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
         </LinearLayout>
     </ScrollView>
 
