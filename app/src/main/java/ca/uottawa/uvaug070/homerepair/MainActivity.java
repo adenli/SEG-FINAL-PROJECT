@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 intent.putExtra("role",role);
                 startActivity(intent);
-                return;
+
             }
         }
 
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         if (value) {
             Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
             // add the welcome script
-            return;
+            
         }
     }
 }
