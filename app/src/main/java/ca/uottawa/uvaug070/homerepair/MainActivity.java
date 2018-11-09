@@ -73,14 +73,14 @@ public class MainActivity extends AppCompatActivity {
                 boolean adminExists = false;
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Account account = postSnapshot.getValue(Account.class);
-                    if(account.getRole() == Role.ADMIN) {
+                    if(account instanceof Admin) {
                         adminExists = true;
                     }
                     accounts.add(account);
                 }
                 if(!adminExists) {
                     String id = databaseAccounts.push().getKey();
-                    Account account = new Account("admin", "admin", Role.ADMIN);
+                    Account account = new Account("admin", "admin");
                     databaseAccounts.child(id).setValue(account);
                 }
             }
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         String password = ((EditText)findViewById(R.id.editTextPassword)).getText().toString();
         if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
             String id = databaseAccounts.push().getKey();
-            Account account = new Account(username, password, role);
+            Account account = new Account(username, password);
             databaseAccounts.child(id).setValue(account);
             ((EditText)findViewById(R.id.editTextName)).setText("");
             ((EditText)findViewById(R.id.editTextPassword)).setText("");
@@ -124,9 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
                 intent.putExtra("username",temp.getUsername());
                 String role;
-                if (temp.getRole().equals(Role.ADMIN)){
+                if (temp instanceof Admin){
                     role="Admin";
-                }else if(temp.getRole().equals(Role.HOMEOWNER)){
+                }else if(temp instanceof User){
                     role="HomeOwner";
                 }else{
                     role="ServiceProvider";
