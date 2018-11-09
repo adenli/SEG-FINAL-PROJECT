@@ -36,14 +36,14 @@ public class MainActivity extends AppCompatActivity {
         buttonCreateHomeOwner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addAccount(Role.HOMEOWNER);
+                addAccount();
             }
         });
         buttonCreateServiceProvider = (Button) findViewById(R.id.createServiceProvider);
         buttonCreateServiceProvider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addAccount(Role.SERVICEPROVIDER);
+                addAccount();
             }
         });
 
@@ -73,14 +73,14 @@ public class MainActivity extends AppCompatActivity {
                 boolean adminExists = false;
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Account account = postSnapshot.getValue(Account.class);
-                    if(account.getRole() == Role.ADMIN) {
+                    if(account instanceof Admin) {
                         adminExists = true;
                     }
                     accounts.add(account);
                 }
                 if(!adminExists) {
                     String id = databaseAccounts.push().getKey();
-                    Account account = new Account("admin", "admin", Role.ADMIN);
+                    Account account = new Account("admin", "admin");
                     databaseAccounts.child(id).setValue(account);
                 }
             }
@@ -91,12 +91,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void addAccount(Role role) {
+    private void addAccount() {
         String username = ((EditText)findViewById(R.id.editTextName)).getText().toString().trim();
         String password = ((EditText)findViewById(R.id.editTextPassword)).getText().toString();
         if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
             String id = databaseAccounts.push().getKey();
-            Account account = new Account(username, password, role);
+            Account account = new Account(username, password);
             databaseAccounts.child(id).setValue(account);
             ((EditText)findViewById(R.id.editTextName)).setText("");
             ((EditText)findViewById(R.id.editTextPassword)).setText("");
@@ -105,7 +105,34 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_LONG).show();
         }
     }
-
+    private void addServiceProvider() {
+        String username = ((EditText)findViewById(R.id.editTextName)).getText().toString().trim();
+        String password = ((EditText)findViewById(R.id.editTextPassword)).getText().toString();
+        if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
+            String id = databaseAccounts.push().getKey();
+            ServiceProvider account = new ServiceProvider(username, password);
+            databaseAccounts.child(id).setValue(account);
+            ((EditText)findViewById(R.id.editTextName)).setText("");
+            ((EditText)findViewById(R.id.editTextPassword)).setText("");
+            Toast.makeText(this, "Account created", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_LONG).show();
+        }
+    }
+    private void addUser() {
+        String username = ((EditText)findViewById(R.id.editTextName)).getText().toString().trim();
+        String password = ((EditText)findViewById(R.id.editTextPassword)).getText().toString();
+        if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
+            String id = databaseAccounts.push().getKey();
+            User account = new User(username, password);
+            databaseAccounts.child(id).setValue(account);
+            ((EditText)findViewById(R.id.editTextName)).setText("");
+            ((EditText)findViewById(R.id.editTextPassword)).setText("");
+            Toast.makeText(this, "Account created", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_LONG).show();
+        }
+    }
     private void login(){
         String value = "A";
 
@@ -125,9 +152,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
                 intent.putExtra("username",temp.getUsername());
                 String role;
-                if (temp.getRole().equals(Role.ADMIN)){
+                if (temp instanceof Admin){
                     role="Admin";
-                }else if(temp.getRole().equals(Role.HOMEOWNER)){
+                }else if(temp instanceof User){
                     role="HomeOwner";
                 }else{
                     role="ServiceProvider";
