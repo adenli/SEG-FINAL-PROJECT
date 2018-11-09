@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(!adminExists) {
                     String id = databaseAccounts.push().getKey();
-                    Account account = new Account("admin", "admin");
+                    Admin account = new Admin("admin", "admin");
                     databaseAccounts.child(id).setValue(account);
                 }
             }
