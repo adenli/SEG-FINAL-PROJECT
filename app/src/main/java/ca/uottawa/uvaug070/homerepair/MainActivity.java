@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
         while (iterator.hasNext()) {
             Account temp= iterator.next();
-            Toast.makeText(getApplicationContext(), temp.getUsername(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), temp.getUsername(), Toast.LENGTH_SHORT).show();
             if (((username.getText().toString().equals(temp.getUsername())))&& (password.getText().toString().equals(temp.getPassword()))) {
                 value = false;
                 Intent intent = new Intent(getApplicationContext(),WelcomeActivity.class);
