@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void login(){
-        Boolean value = true;
+        String value = "A";
 
         Iterator<Account> iterator = accounts.iterator();
 
@@ -118,8 +118,9 @@ public class MainActivity extends AppCompatActivity {
         while (iterator.hasNext()) {
             Account temp= iterator.next();
             //Toast.makeText(getApplicationContext(), temp.getUsername(), Toast.LENGTH_SHORT).show();
+
             if (((username.getText().toString().equals(temp.getUsername())))&& (password.getText().toString().equals(temp.getPassword()))) {
-                value = false;
+                value = "Success";
                 Intent intent = new Intent(getApplicationContext(),WelcomeActivity.class);
                 Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
                 intent.putExtra("username",temp.getUsername());
@@ -135,13 +136,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
+            if (!iterator.hasNext()){
+                value="DNE";
+            }
         }
 
 
-        if (value) {
+        if (value=="A") {
             Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
             // add the welcome script
-            
+
+        }
+
+        if (value=="DNE"){
+            Toast.makeText(getApplicationContext(), "An account does not exist", Toast.LENGTH_SHORT).show();
+
         }
     }
 }
