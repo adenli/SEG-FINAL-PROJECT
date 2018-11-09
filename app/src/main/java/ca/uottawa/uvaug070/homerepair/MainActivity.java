@@ -191,14 +191,14 @@ public class MainActivity extends AppCompatActivity {
                 }
                 intent.putExtra("role",role);
                 startActivity(intent);
-
+                break;
             }
 
-            if ((username.getText().toString().equals(temp.getUsername()))&&(!(password.getText().toString().equals(temp.getPassword())))){
+            else if ((username.getText().toString().equals(temp.getUsername()))&&(!(password.getText().toString().equals(temp.getPassword())))){
                 Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
                 break;
             }
-            if (!(username.getText().toString().equals(temp.getUsername()))&&!(iterator.hasNext())){
+            else if (!(username.getText().toString().equals(temp.getUsername()))&&!(iterator.hasNext())){
                 Toast.makeText(getApplicationContext(), "An account does not exist", Toast.LENGTH_SHORT).show();
             }
         }
