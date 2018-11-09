@@ -1,5 +1,6 @@
 package ca.uottawa.uvaug070.homerepair;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void login(){
-        Boolean value = null;
+        Boolean value = true;
 
         Iterator<Account> iterator = accounts.iterator();
 
@@ -114,28 +115,33 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Successaaaaa!", Toast.LENGTH_SHORT).show();
         }
 
-
-
-
         while (iterator.hasNext()) {
             Account temp= iterator.next();
-
+            //Toast.makeText(getApplicationContext(), temp.getUsername(), Toast.LENGTH_SHORT).show();
             if (((username.getText().toString().equals(temp.getUsername())))&& (password.getText().toString().equals(temp.getPassword()))) {
+                value = false;
+                Intent intent = new Intent(getApplicationContext(),WelcomeActivity.class);
+                Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
+                intent.putExtra("username",temp.getUsername());
+                String role;
+                if (temp.getRole().equals(Role.ADMIN)){
+                    role="Admin";
+                }else if(temp.getRole().equals(Role.HOMEOWNER)){
+                    role="HomeOwner";
+                }else{
+                    role="ServiceProvider";
+                }
+                intent.putExtra("role",role);
+                startActivity(intent);
 
-                value = true;
-                break;
             }
         }
 
 
-        if (value == null) {
+        if (value) {
             Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
             // add the welcome script
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
-
-            //add the welcome script
+            
         }
     }
 }
