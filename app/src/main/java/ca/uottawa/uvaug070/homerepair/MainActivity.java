@@ -94,26 +94,41 @@ public class MainActivity extends AppCompatActivity {
     private void addAccount(Role role) {
         String username = ((EditText)findViewById(R.id.editTextName)).getText().toString().trim();
         String password = ((EditText)findViewById(R.id.editTextPassword)).getText().toString();
-        if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
-            String id = databaseAccounts.push().getKey();
-            Account account = new Account(username, password, role);
-            databaseAccounts.child(id).setValue(account);
-            ((EditText)findViewById(R.id.editTextName)).setText("");
-            ((EditText)findViewById(R.id.editTextPassword)).setText("");
-            Toast.makeText(this, "Account created", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_LONG).show();
+
+        Iterator<Account> iterator = accounts.iterator();
+        boolean AccountCreated = false;
+        while (iterator.hasNext()){
+            Account temp= iterator.next();
+
+            if (username.equals(temp.getUsername())){
+                Toast.makeText(this, "An account under this username has already been created. Try another Username", Toast.LENGTH_LONG).show();
+
+                AccountCreated = true;
+            }
         }
+
+        if (AccountCreated!=true){
+
+            if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
+                String id = databaseAccounts.push().getKey();
+                Account account = new Account(username, password, role);
+                databaseAccounts.child(id).setValue(account);
+                ((EditText)findViewById(R.id.editTextName)).setText("");
+                ((EditText)findViewById(R.id.editTextPassword)).setText("");
+                Toast.makeText(this, "Account created", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+
     }
 
     private void login(){
         String value = "A";
 
         Iterator<Account> iterator = accounts.iterator();
-
-        if (username.getText().toString().equals("aden1")){
-            Toast.makeText(getApplicationContext(), "Successaaaaa!", Toast.LENGTH_SHORT).show();
-        }
 
         while (iterator.hasNext()) {
             Account temp= iterator.next();
