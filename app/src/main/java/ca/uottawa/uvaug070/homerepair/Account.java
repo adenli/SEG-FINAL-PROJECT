@@ -7,6 +7,7 @@ public class Account {
     public Account(String username, String password, Role role) {
         this.username = username;
         this.password = password;
+        this.role = role;
     }
     public Account() {
 

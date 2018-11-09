@@ -7,5 +7,7 @@ public class ServiceProvider extends Account {
     public ServiceProvider(String username, String password, Role role) {
         super(username, password, role);
     }
-
+    public ServiceProvider(){
+        super();
+    }
 }
