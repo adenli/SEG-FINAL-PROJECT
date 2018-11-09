@@ -3,7 +3,8 @@ package ca.uottawa.uvaug070.homerepair;
 public class Account {
     String username;
     String password;
-    public Account(String username, String password) {
+    Role role;
+    public Account(String username, String password, Role role) {
         this.username = username;
         this.password = password;
     }
@@ -22,4 +23,5 @@ public class Account {
     public String getPassword() {
         return password;
     }
+    public Role getRole() {return role;}
 }

@@ -36,14 +36,14 @@ public class MainActivity extends AppCompatActivity {
         buttonCreateHomeOwner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addAccount();
+                addUser();
             }
         });
         buttonCreateServiceProvider = (Button) findViewById(R.id.createServiceProvider);
         buttonCreateServiceProvider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addAccount();
+                addServiceProvider();
             }
         });
 
@@ -72,15 +72,24 @@ public class MainActivity extends AppCompatActivity {
                 accounts.clear();
                 boolean adminExists = false;
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Account account = postSnapshot.getValue(Account.class);
-                    if(account.getUsername() == "admin") {
-                        adminExists = true;
+                    Account temp = postSnapshot.getValue(Account.class);
+                    if(temp.getRole() == Role.USER) {
+                        User account = (User) temp;
+                        accounts.add(account);
                     }
-                    accounts.add(account);
+                    if(temp.getRole() == Role.SERVICEPROVIDER) {
+                        ServiceProvider account = (ServiceProvider) temp;
+                        accounts.add(account);
+                    }
+                    if(temp.getRole() == Role.ADMIN) {
+                        Admin account = (Admin) temp;
+                        adminExists = true;
+                        accounts.add(account);
+                    }
                 }
                 if(!adminExists) {
                     String id = databaseAccounts.push().getKey();
-                    Admin account = new Admin("admin", "admin");
+                    Admin account = new Admin("admin", "admin", Role.ADMIN);
                     databaseAccounts.child(id).setValue(account);
                 }
             }
@@ -91,26 +100,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void addAccount() {
-        String username = ((EditText)findViewById(R.id.editTextName)).getText().toString().trim();
-        String password = ((EditText)findViewById(R.id.editTextPassword)).getText().toString();
-        if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
-            String id = databaseAccounts.push().getKey();
-            Account account = new Account(username, password);
-            databaseAccounts.child(id).setValue(account);
-            ((EditText)findViewById(R.id.editTextName)).setText("");
-            ((EditText)findViewById(R.id.editTextPassword)).setText("");
-            Toast.makeText(this, "Account created", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_LONG).show();
-        }
-    }
     private void addServiceProvider() {
         String username = ((EditText)findViewById(R.id.editTextName)).getText().toString().trim();
         String password = ((EditText)findViewById(R.id.editTextPassword)).getText().toString();
         if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
             String id = databaseAccounts.push().getKey();
-            ServiceProvider account = new ServiceProvider(username, password);
+            ServiceProvider account = new ServiceProvider(username, password, Role.SERVICEPROVIDER);
             databaseAccounts.child(id).setValue(account);
             ((EditText)findViewById(R.id.editTextName)).setText("");
             ((EditText)findViewById(R.id.editTextPassword)).setText("");
@@ -124,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         String password = ((EditText)findViewById(R.id.editTextPassword)).getText().toString();
         if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
             String id = databaseAccounts.push().getKey();
-            User account = new User(username, password);
+            User account = new User(username, password, Role.USER);
             databaseAccounts.child(id).setValue(account);
             ((EditText)findViewById(R.id.editTextName)).setText("");
             ((EditText)findViewById(R.id.editTextPassword)).setText("");
@@ -145,13 +140,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-
-
         if (AccountCreated!=true){
 
             if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
                 String id = databaseAccounts.push().getKey();
-                Account account = new Account(username, password);
+                Account account = new Account(username, password, Role.USER);
                 databaseAccounts.child(id).setValue(account);
                 ((EditText)findViewById(R.id.editTextName)).setText("");
                 ((EditText)findViewById(R.id.editTextPassword)).setText("");
