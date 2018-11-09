@@ -160,9 +160,7 @@ public class MainActivity extends AppCompatActivity {
         if (value=="A") {
             Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
             // add the welcome script
-
         }
-
         if (value=="DNE"){
             Toast.makeText(getApplicationContext(), "An account does not exist", Toast.LENGTH_SHORT).show();
 
