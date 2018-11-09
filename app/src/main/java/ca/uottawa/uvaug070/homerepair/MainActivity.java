@@ -72,15 +72,15 @@ public class MainActivity extends AppCompatActivity {
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Account temp = postSnapshot.getValue(Account.class);
                     if(temp.getRole() == Role.USER) {
-                        User account = (User) temp;
+                        User account = postSnapshot.getValue(User.class);
                         accounts.add(account);
                     }
                     if(temp.getRole() == Role.SERVICEPROVIDER) {
-                        ServiceProvider account = (ServiceProvider) temp;
+                        ServiceProvider account = postSnapshot.getValue(ServiceProvider.class);
                         accounts.add(account);
                     }
                     if(temp.getRole() == Role.ADMIN) {
-                        Admin account = (Admin) temp;
+                        Admin account = postSnapshot.getValue(Admin.class);
                         adminExists = true;
                         accounts.add(account);
                     }
@@ -109,7 +109,33 @@ public class MainActivity extends AppCompatActivity {
             ((EditText)findViewById(R.id.editTextPassword)).setText("");
             Toast.makeText(this, "Account created", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_LONG).show();}
+
+
+        Iterator<Account> iterator = accounts.iterator();
+        boolean AccountCreated = false;
+        while (iterator.hasNext()) {
+            Account temp = iterator.next();
+
+            if (username.equals(temp.getUsername())) {
+                Toast.makeText(this, "An account under this username has already been created. Try another Username", Toast.LENGTH_LONG).show();
+
+                AccountCreated = true;
+            }
+        }
+
+        if (AccountCreated!=true){
+
+            if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
+                String id = databaseAccounts.push().getKey();
+                Account account = new Account(username, password, Role.SERVICEPROVIDER);
+                databaseAccounts.child(id).setValue(account);
+                ((EditText)findViewById(R.id.editTextName)).setText("");
+                ((EditText)findViewById(R.id.editTextPassword)).setText("");
+                Toast.makeText(this, "Account created", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_LONG).show();
+            }
         }
     }
     private void addUser() {
