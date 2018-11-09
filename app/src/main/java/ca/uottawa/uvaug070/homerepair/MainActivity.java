@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 boolean adminExists = false;
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Account account = postSnapshot.getValue(Account.class);
-                    if(account instanceof Admin) {
+                    if(account.getUsername() == "admin") {
                         adminExists = true;
                     }
                     accounts.add(account);
