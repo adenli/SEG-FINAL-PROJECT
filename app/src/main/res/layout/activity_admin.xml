@@ -21,7 +21,8 @@
         <ListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
-            android:layout_height="339dp" >
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
         </ListView>
 
@@ -29,7 +30,7 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="View and Edit Services" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
