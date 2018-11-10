@@ -47,6 +47,7 @@ public class ServiceActivity extends AppCompatActivity{
 
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
                 if(servicename.getText().equals("")) {
                     Toast.makeText(getApplicationContext(), "No name specified", Toast.LENGTH_SHORT).show();
                 } else if (rateamount.getText().equals("")) {
@@ -54,6 +55,11 @@ public class ServiceActivity extends AppCompatActivity{
                 } else {
                     addService((servicename.getText().toString()),Integer.parseInt(rateamount.getText().toString()));
                 }
+=======
+                addService((servicename.getText().toString()),Integer.parseInt(rateamount.getText().toString()));
+                createList();
+
+>>>>>>> master
             }
         });
 
