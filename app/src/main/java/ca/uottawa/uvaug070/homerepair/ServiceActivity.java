@@ -74,8 +74,8 @@ public class ServiceActivity extends AppCompatActivity{
         if (rate < 0) {
             Toast.makeText(getApplicationContext(), "Invalid rate", Toast.LENGTH_SHORT).show();
         } else {
-            Service test = new Service(name, rate);
             String id = databaseServices.push().getKey();
+            Service test = new Service(name, rate, id);
             databaseServices.child(id).setValue(test);
         }
     }
@@ -164,9 +164,8 @@ public class ServiceActivity extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(), "No rate specified", Toast.LENGTH_SHORT).show();
                 } else {
                     try{
-                        addService((editText.getText().toString()),Integer.parseInt(editText2.getText().toString()));
-                        services.remove(position);
-                        createList();
+                        Service toAdd = new Service(editText.getText().toString(), Integer.parseInt(editText2.getText().toString()), services.get(position).getUid());
+                        databaseServices.child(services.get(position).getUid()).setValue(toAdd);
                         dialog.dismiss();
                     } catch (NumberFormatException e) {
                         Toast.makeText(getApplicationContext(), "Invalid rate", Toast.LENGTH_SHORT).show();
@@ -188,6 +187,8 @@ public class ServiceActivity extends AppCompatActivity{
                 break;
 
             case R.id.delete_id:
+                Toast.makeText(getApplicationContext(), services.get(info.position).getUid(), Toast.LENGTH_SHORT).show();
+                databaseServices.child(services.get(info.position).getUid()).setValue(null);
                 services.remove(info.position);
                 break;
             default:

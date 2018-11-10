@@ -3,9 +3,11 @@ package ca.uottawa.uvaug070.homerepair;
 public class Service {
     String name;
     int rate;
-    public Service(String name, int rate) {
+    String uid;
+    public Service(String name, int rate, String uid) {
         this.name = name;
         this.rate = rate;
+        this.uid = uid;
     }
     public Service() {
 
@@ -21,5 +23,11 @@ public class Service {
     }
     public int getRate() {
         return rate;
+    }
+    public String getUid() {
+        return uid;
+    }
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }
