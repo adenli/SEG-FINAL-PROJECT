@@ -27,18 +27,23 @@ import static android.widget.AdapterView.*;
 public class AdminActivity extends AppCompatActivity {
     ListView listView;
     List<Account> accounts;
+    List<Service> services;
     DatabaseReference databaseAccounts;
+    DatabaseReference databaseServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
         accounts = new ArrayList<>();
+        services = new ArrayList<>();
         listView = findViewById(R.id.listview);
         databaseAccounts = FirebaseDatabase.getInstance().getReference("accounts");
-
+        databaseServices = FirebaseDatabase.getInstance().getReference("services");
+        addService("yolo swaggin", 42069);
         ((TextView) findViewById(R.id.welcome_text)).setText("Welcome admin!");
     }
+
     protected void onStart() {
         super.onStart();
         databaseAccounts.addValueEventListener(new ValueEventListener() {
@@ -74,8 +79,25 @@ public class AdminActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) { }
         }
         );
+        databaseServices.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                services.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Service temp = postSnapshot.getValue(Service.class);
+                    services.add(temp);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
     }
 
+    private void addService(String name, int rate) {
+        Service test = new Service(name, rate);
+        String id = databaseServices.push().getKey();
+        databaseServices.child(id).setValue(test);
+    }
 
     private void listCreate() {
         ArrayList<String> username= new ArrayList<>();
@@ -96,7 +118,6 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }
 
