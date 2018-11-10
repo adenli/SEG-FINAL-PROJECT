@@ -161,9 +161,8 @@ public class ServiceActivity extends AppCompatActivity{
             case R.id.edit_id:
                 showInputBox(info.position);
 
-
-
             case R.id.delete_id:
+                services.remove(info.position);
 
 
                 createList();
@@ -176,10 +175,6 @@ public class ServiceActivity extends AppCompatActivity{
                     return super.onContextItemSelected(item);
         }
     }
-
-
-
-
 
 }
 
