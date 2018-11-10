@@ -7,4 +7,19 @@ public class Service {
         this.name = name;
         this.rate = rate;
     }
+    public Service() {
+
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
+    public int getRate() {
+        return rate;
+    }
 }

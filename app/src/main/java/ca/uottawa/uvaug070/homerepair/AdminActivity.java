@@ -1,11 +1,13 @@
 package ca.uottawa.uvaug070.homerepair;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,17 +28,33 @@ public class AdminActivity extends AppCompatActivity {
     ListView listView;
     List<Account> accounts;
     DatabaseReference databaseAccounts;
+    ListView serviceview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+
         accounts = new ArrayList<>();
+
         listView = findViewById(R.id.listview);
         databaseAccounts = FirebaseDatabase.getInstance().getReference("accounts");
 
         ((TextView) findViewById(R.id.welcome_text)).setText("Welcome admin!");
+
+        final Button button= findViewById(R.id.button);
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ServiceActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
+
+
     protected void onStart() {
         super.onStart();
         databaseAccounts.addValueEventListener(new ValueEventListener() {
@@ -74,6 +92,7 @@ public class AdminActivity extends AppCompatActivity {
         );
     }
 
+
     private void listCreate() {
         ArrayList<String> username= new ArrayList<>();
         username.clear();
@@ -88,10 +107,15 @@ public class AdminActivity extends AppCompatActivity {
                 final String item = (String)parent.getItemAtPosition(position);
                 //Do something with the string that you justgot!
                 Toast.makeText(getApplicationContext(), item, Toast.LENGTH_SHORT).show();
-
-
             }
         });
+
+
+
+
     }
+
+
+
 }
 
