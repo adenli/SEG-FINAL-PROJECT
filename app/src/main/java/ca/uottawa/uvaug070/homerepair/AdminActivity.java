@@ -81,10 +81,22 @@ public class AdminActivity extends AppCompatActivity {
         ArrayList<String> username= new ArrayList<>();
         username.clear();
         for(Account temp:accounts) {
-            username.add(temp.getUsername());
+            username.add(temp.getUsername()+"\n"+temp.getPassword()+"\n"+temp.getRole());
         }
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.simple_list_item_1, username);
         listView.setAdapter(arrayAdapter);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                final String item = (String)parent.getItemAtPosition(position);
+                //Do something with the string that you justgot!
+                Toast.makeText(getApplicationContext(), item, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+
 }
 
