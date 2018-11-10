@@ -38,7 +38,6 @@ public class AdminActivity extends AppCompatActivity {
         databaseAccounts = FirebaseDatabase.getInstance().getReference("accounts");
 
         ((TextView) findViewById(R.id.welcome_text)).setText("Welcome admin!");
-        ListCreate();
     }
     protected void onStart() {
         super.onStart();
@@ -69,6 +68,7 @@ public class AdminActivity extends AppCompatActivity {
                     Admin account = new Admin("admin", "admin", Role.ADMIN);
                     databaseAccounts.child(id).setValue(account);
                 }
+                listCreate();
             }
             @Override
             public void onCancelled(DatabaseError databaseError) { }
@@ -77,12 +77,12 @@ public class AdminActivity extends AppCompatActivity {
     }
 
 
-    private void ListCreate() {
+    private void listCreate() {
         ArrayList<String> username= new ArrayList<>();
+        username.clear();
         for(Account temp:accounts) {
-            username.add(temp.getUsername().toString()+" "+temp.getPassword().toString());
+            username.add(temp.getUsername());
         }
-        username.add("a"+"\n"+"a");
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.simple_list_item_1, username);
         listView.setAdapter(arrayAdapter);
     }
