@@ -47,7 +47,13 @@ public class ServiceActivity extends AppCompatActivity{
 
             @Override
             public void onClick(View v) {
-                addService((servicename.getText().toString()),Integer.parseInt(rateamount.getText().toString()));
+                if(servicename.getText().equals("")) {
+                    Toast.makeText(getApplicationContext(), "No name specified", Toast.LENGTH_SHORT).show();
+                } else if (rateamount.getText().equals("")) {
+                    Toast.makeText(getApplicationContext(), "No rate specified", Toast.LENGTH_SHORT).show();
+                } else {
+                    addService((servicename.getText().toString()),Integer.parseInt(rateamount.getText().toString()));
+                }
             }
         });
 
@@ -58,7 +64,7 @@ public class ServiceActivity extends AppCompatActivity{
 
 
     private void addService(String name, int rate) {
-        if(name == null) {
+        if(name.equals(null)) {
             Toast.makeText(getApplicationContext(), "No name specified", Toast.LENGTH_SHORT).show();
         } else if (rate < 0) {
             Toast.makeText(getApplicationContext(), "Invalid rate", Toast.LENGTH_SHORT).show();
