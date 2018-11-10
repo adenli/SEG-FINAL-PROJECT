@@ -64,6 +64,7 @@ public class ServiceActivity extends AppCompatActivity{
         String id = databaseServices.push().getKey();
         databaseServices.child(id).setValue(test);
 
+
     }
 
     @Override
@@ -160,12 +161,15 @@ public class ServiceActivity extends AppCompatActivity{
         AdapterView.AdapterContextMenuInfo info= (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch(item.getItemId()){
 
+
             case R.id.edit_id:
                 showInputBox(info.position);
 
             case R.id.delete_id:
-                services.remove(info.position);
 
+
+                databaseServices.child("services").child(String.valueOf(services.get(info.position).)).setValue(null);
+                services.remove(info.position);
 
                 createList();
 
