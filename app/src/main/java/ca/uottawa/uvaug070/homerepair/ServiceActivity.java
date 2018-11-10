@@ -186,6 +186,7 @@ public class ServiceActivity extends AppCompatActivity{
                 break;
 
             case R.id.delete_id:
+                databaseServices.child("services").child(String.valueOf(services.get(info.position))).removeValue();
                 services.remove(info.position);
                 break;
             default:
