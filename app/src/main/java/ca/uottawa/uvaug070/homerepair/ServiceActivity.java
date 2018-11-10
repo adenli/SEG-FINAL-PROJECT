@@ -47,19 +47,18 @@ public class ServiceActivity extends AppCompatActivity{
 
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
-                if(servicename.getText().equals("")) {
+                if(servicename.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "No name specified", Toast.LENGTH_SHORT).show();
-                } else if (rateamount.getText().equals("")) {
+                } else if (rateamount.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "No rate specified", Toast.LENGTH_SHORT).show();
                 } else {
-                    addService((servicename.getText().toString()),Integer.parseInt(rateamount.getText().toString()));
+                    try{
+                        addService((servicename.getText().toString()),Integer.parseInt(rateamount.getText().toString()));
+                        createList();
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(getApplicationContext(), "Invalid rate", Toast.LENGTH_SHORT).show();
+                    }
                 }
-=======
-                addService((servicename.getText().toString()),Integer.parseInt(rateamount.getText().toString()));
-                createList();
-
->>>>>>> master
             }
         });
 
@@ -70,9 +69,7 @@ public class ServiceActivity extends AppCompatActivity{
 
 
     private void addService(String name, int rate) {
-        if(name.equals(null)) {
-            Toast.makeText(getApplicationContext(), "No name specified", Toast.LENGTH_SHORT).show();
-        } else if (rate < 0) {
+        if (rate < 0) {
             Toast.makeText(getApplicationContext(), "Invalid rate", Toast.LENGTH_SHORT).show();
         } else {
             Service test = new Service(name, rate);
@@ -159,11 +156,20 @@ public class ServiceActivity extends AppCompatActivity{
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addService(editText.getText().toString(),Integer.parseInt(editText2.getText().toString()));
-                createList();
-
-                services.remove(position);
-                dialog.dismiss();
+                if(editText.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "No name specified", Toast.LENGTH_SHORT).show();
+                } else if (editText.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "No rate specified", Toast.LENGTH_SHORT).show();
+                } else {
+                    try{
+                        addService((editText.getText().toString()),Integer.parseInt(editText2.getText().toString()));
+                        services.remove(position);
+                        createList();
+                        dialog.dismiss();
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(getApplicationContext(), "Invalid rate", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
         dialog.show();
@@ -177,18 +183,17 @@ public class ServiceActivity extends AppCompatActivity{
 
             case R.id.edit_id:
                 showInputBox(info.position);
+                break;
 
             case R.id.delete_id:
                 services.remove(info.position);
+                break;
+            default:
+                return super.onContextItemSelected(item);
 
-
-                createList();
-
-                return true;
-
-                default:
-                    return super.onContextItemSelected(item);
         }
+        createList();
+        return true;
     }
 
 }
