@@ -96,8 +96,20 @@ public class AdminActivity extends AppCompatActivity {
     private void listCreate() {
         ArrayList<String> username= new ArrayList<>();
         username.clear();
+        String role = "";
         for(Account temp:accounts) {
-            username.add(temp.getUsername()+"\n"+temp.getPassword()+"\n"+temp.getRole());
+            switch(temp.getRole()) {
+                case USER:
+                    role = "Homeowner";
+                    break;
+                case ADMIN:
+                    role = "Admin";
+                    break;
+                case SERVICEPROVIDER:
+                    role = "Service Provider";
+                    break;
+            }
+            username.add("Username: " + temp.getUsername()+"\n"+"Password: " + temp.getPassword()+"\n"+"Role: " + role);
         }
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.simple_list_item_1, username);
         listView.setAdapter(arrayAdapter);

@@ -33,7 +33,7 @@
             android:id="@+id/Rate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rate" />
+            android:text="Rate ($/hour)" />
 
         <EditText
             android:id="@+id/rateamount"

@@ -110,7 +110,7 @@ public class ServiceActivity extends AppCompatActivity{
         ArrayList<String> service=new ArrayList<>();
         service.clear();
         for (Service temp1:services){
-            service.add(temp1.getName()+"\n"+temp1.getRate());
+            service.add(temp1.getName()+"\n"+"$"+temp1.getRate()+"/hour");
         }
 
         ArrayAdapter arrayAdapter2 = new ArrayAdapter(this, R.layout.simple_list_item_1, service);
