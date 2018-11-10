@@ -58,10 +58,15 @@ public class ServiceActivity extends AppCompatActivity{
     }
 
     private void addService(String name, int rate) {
-        Service test = new Service(name, rate);
-        String id = databaseServices.push().getKey();
-        databaseServices.child(id).setValue(test);
-
+        if(name == null) {
+            Toast.makeText(getApplicationContext(), "No name specified", Toast.LENGTH_SHORT).show();
+        } else if (rate < 0) {
+            Toast.makeText(getApplicationContext(), "Invalid rate", Toast.LENGTH_SHORT).show();
+        } else {
+            Service test = new Service(name, rate);
+            String id = databaseServices.push().getKey();
+            databaseServices.child(id).setValue(test);
+        }
     }
 
     @Override
