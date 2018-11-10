@@ -40,22 +40,22 @@ public class ServiceActivity extends AppCompatActivity{
         databaseServices = FirebaseDatabase.getInstance().getReference("services");
         final EditText servicename=(EditText)findViewById(R.id.servicename);
         final EditText rateamount=(EditText)findViewById(R.id.rateamount);
-        View button = findViewById(R.id.addservice);
+        View addservice = findViewById(R.id.addservice);
 
-        button.setOnTouchListener(new View.OnTouchListener() {
+        addservice.setOnClickListener(new View.OnClickListener(){
+
+
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 addService((servicename.getText().toString()),Integer.parseInt(rateamount.getText().toString()));
-
-                return false;
             }
-
         });
 
 
 
 
     }
+
 
     private void addService(String name, int rate) {
         if(name == null) {
@@ -173,8 +173,6 @@ public class ServiceActivity extends AppCompatActivity{
                 createList();
 
                 return true;
-
-
 
                 default:
                     return super.onContextItemSelected(item);
