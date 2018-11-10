@@ -48,6 +48,8 @@ public class ServiceActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 addService((servicename.getText().toString()),Integer.parseInt(rateamount.getText().toString()));
+                createList();
+
             }
         });
 
