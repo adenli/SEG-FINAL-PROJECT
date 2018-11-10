@@ -54,6 +54,8 @@ public class ServiceActivity extends AppCompatActivity{
                 } else {
                     try{
                         addService((servicename.getText().toString()),Integer.parseInt(rateamount.getText().toString()));
+                        servicename.getText().clear();
+                        rateamount.getText().clear();
                         createList();
                     } catch (NumberFormatException e) {
                         Toast.makeText(getApplicationContext(), "Invalid rate", Toast.LENGTH_SHORT).show();
