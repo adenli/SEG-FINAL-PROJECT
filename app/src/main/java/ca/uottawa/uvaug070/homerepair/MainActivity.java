@@ -178,8 +178,19 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(getApplicationContext(), temp.getUsername(), Toast.LENGTH_SHORT).show();
 
             if (((username.getText().toString().equals(temp.getUsername())))&& (password.getText().toString().equals(temp.getPassword()))) {
-                Intent intent = new Intent(getApplicationContext(),WelcomeActivity.class);
+                Intent intent = null;
                 Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
+
+                if (temp instanceof Admin){
+                    intent = new Intent(getApplicationContext(),AdminActivity.class);
+                }
+                if (temp instanceof User){
+                    intent = new Intent(getApplicationContext(),WelcomeActivity.class);
+                }
+                if (temp instanceof ServiceProvider){
+                    intent = new Intent(getApplicationContext(),WelcomeActivity.class);
+                }
+                
                 intent.putExtra("username",temp.getUsername());
                 String role;
                 if (temp instanceof Admin){
@@ -190,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
                     role="ServiceProvider";
                 }
                 intent.putExtra("role",role);
+
                 startActivity(intent);
                 break;
             }
