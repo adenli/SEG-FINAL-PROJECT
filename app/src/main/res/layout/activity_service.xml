@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,27 +16,39 @@
             android:layout_height="339dp"/>
 
 
+        <TextView
+            android:id="@+id/Service_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Service name" />
+
+        <EditText
+            android:id="@+id/servicename"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/Rate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rate" />
+
+        <EditText
+            android:id="@+id/rateamount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
         <Button
             android:id="@+id/addservice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="addservice" />
-
-        <Button
-            android:id="@+id/editservice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="editservice" />
-
-        <Button
-            android:id="@+id/removeservice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="removeservice" />
+            android:text="add service" />
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</ScrollView>

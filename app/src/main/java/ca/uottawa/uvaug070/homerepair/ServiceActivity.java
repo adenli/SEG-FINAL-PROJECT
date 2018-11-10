@@ -1,11 +1,19 @@
 package ca.uottawa.uvaug070.homerepair;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +38,23 @@ public class ServiceActivity extends AppCompatActivity{
         Intent intent = getIntent();
         serviceview=findViewById(R.id.serviceview);
         databaseServices = FirebaseDatabase.getInstance().getReference("services");
+        final EditText servicename=(EditText)findViewById(R.id.servicename);
+        final EditText rateamount=(EditText)findViewById(R.id.rateamount);
+        View button = findViewById(R.id.addservice);
 
-        addService("yolo swaggin", 42069);
+        button.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                addService((servicename.getText().toString()),Integer.parseInt(rateamount.getText().toString()));
+
+                return false;
+            }
+
+        });
+
+
+
+
     }
 
     private void addService(String name, int rate) {
@@ -65,6 +88,7 @@ public class ServiceActivity extends AppCompatActivity{
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void createList() {
 
         ArrayList<String> service=new ArrayList<>();
@@ -76,6 +100,7 @@ public class ServiceActivity extends AppCompatActivity{
         ArrayAdapter arrayAdapter2 = new ArrayAdapter(this, R.layout.simple_list_item_1, service);
         serviceview.setAdapter(arrayAdapter2);
 
+        registerForContextMenu(serviceview);
         serviceview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
@@ -84,7 +109,76 @@ public class ServiceActivity extends AppCompatActivity{
                 Toast.makeText(getApplicationContext(), item, Toast.LENGTH_SHORT).show();
             }
         });
+
+        serviceview.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
+
     }
+    @SuppressLint("ResourceType")
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
+        super.onCreateContextMenu(menu,v,menuInfo);
+
+        MenuInflater inflater= getMenuInflater();
+        inflater.inflate(R.layout.main_context_menu,menu);
+    }
+    public void showInputBox(final int position){
+        final Dialog dialog=new Dialog(ServiceActivity.this);
+        dialog.setTitle("Input Box");
+        dialog.setContentView(R.layout.dialog_box);
+        TextView txtMessage=(TextView)dialog.findViewById(R.id.txtmessage);
+        txtMessage.setText("Update item");
+
+        final EditText editText=(EditText)dialog.findViewById(R.id.txtinput);
+        final EditText editText2=(EditText)dialog.findViewById(R.id.txtinput2);
+
+        Button bt=(Button)dialog.findViewById(R.id.btdone);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addService(editText.getText().toString(),Integer.parseInt(editText2.getText().toString()));
+                createList();
+
+                services.remove(position);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+        AdapterView.AdapterContextMenuInfo info= (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch(item.getItemId()){
+
+            case R.id.edit_id:
+                showInputBox(info.position);
+
+
+
+            case R.id.delete_id:
+
+
+                createList();
+
+                return true;
+
+
+
+                default:
+                    return super.onContextItemSelected(item);
+        }
+    }
+
+
+
 
 
 }
