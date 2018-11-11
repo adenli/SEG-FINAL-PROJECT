@@ -10,10 +10,7 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
-    @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
-    }
+
     @Test
     public void checkAccountPassword() {
         Account testAccount = new Account("simon","cat",Role.ADMIN);
@@ -32,7 +29,7 @@ public class ExampleUnitTest {
     @Test
     public void checkServicerRate() {
         Service testService = new Service("Plumbing",4,"A2hI");
-        assertEquals("Check that the proper rate is output","4", ""+testService.getRate());
+        assertEquals("Check that the proper rate is output","4.0", (""+testService.getRate()));
     }
     @Test
     public void checkServiceUid() {
