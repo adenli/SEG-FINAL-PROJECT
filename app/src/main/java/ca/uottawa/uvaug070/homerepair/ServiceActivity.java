@@ -28,6 +28,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.datatype.Duration;
+
 public class ServiceActivity extends AppCompatActivity{
     DatabaseReference databaseServices;
     ListView serviceview;
@@ -189,7 +191,6 @@ public class ServiceActivity extends AppCompatActivity{
                 break;
 
             case R.id.delete_id:
-                Toast.makeText(getApplicationContext(), services.get(info.position).getUid(), Toast.LENGTH_SHORT).show();
                 databaseServices.child(services.get(info.position).getUid()).setValue(null);
                 services.remove(info.position);
                 break;
