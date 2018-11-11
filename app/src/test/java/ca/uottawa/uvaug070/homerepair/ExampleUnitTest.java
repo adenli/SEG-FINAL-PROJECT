@@ -15,9 +15,28 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
     @Test
-    public void checkAccountUserAndPass() {
+    public void checkAccountPassword() {
+        Account testAccount = new Account("simon","cat",Role.ADMIN);
+        assertEquals("Check that the proper password is output","cat", testAccount.getPassword());
+    }
+    @Test
+    public void checkAccountUsername() {
         Account testAccount = new Account("simon","cat",Role.ADMIN);
         assertEquals("Check that the proper username is output","simon", testAccount.getUsername());
-        assertEquals("Check that the proper password is output","cat", testAccount.getPassword());
+    }
+    @Test
+    public void checkServiceName() {
+        Service testService = new Service("Plumbing",4,"A2hI");
+        assertEquals("Check that the proper name is output","Plumbing", testService.getName());
+    }
+    @Test
+    public void checkServicerRate() {
+        Service testService = new Service("Plumbing",4,"A2hI");
+        assertEquals("Check that the proper rate is output","4", ""+testService.getRate());
+    }
+    @Test
+    public void checkServiceUid() {
+        Service testService = new Service("Plumbing",4,"A2hI");
+        assertEquals("Check that the proper username is output","A2hI", testService.getUid());
     }
 }
