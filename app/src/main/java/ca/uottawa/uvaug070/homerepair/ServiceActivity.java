@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class ServiceActivity extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(), "No rate specified", Toast.LENGTH_SHORT).show();
                 } else {
                     try{
-                        addService((servicename.getText().toString()),Integer.parseInt(rateamount.getText().toString()));
+                        addService((servicename.getText().toString()),Double.parseDouble(rateamount.getText().toString()));
                         servicename.getText().clear();
                         rateamount.getText().clear();
                         createList();
@@ -70,7 +71,7 @@ public class ServiceActivity extends AppCompatActivity{
     }
 
 
-    private void addService(String name, int rate) {
+    private void addService(String name, double rate) {
         if (rate < 0) {
             Toast.makeText(getApplicationContext(), "Invalid rate", Toast.LENGTH_SHORT).show();
         } else {
@@ -109,8 +110,9 @@ public class ServiceActivity extends AppCompatActivity{
 
         ArrayList<String> service=new ArrayList<>();
         service.clear();
+        DecimalFormat df2 = new DecimalFormat(".##");
         for (Service temp1:services){
-            service.add(temp1.getName()+"\n"+"$"+temp1.getRate()+"/hour");
+            service.add(temp1.getName()+"\n"+"$"+ df2.format(temp1.getRate())+"/hour");
         }
 
         ArrayAdapter arrayAdapter2 = new ArrayAdapter(this, R.layout.simple_list_item_1, service);
@@ -164,7 +166,7 @@ public class ServiceActivity extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(), "No rate specified", Toast.LENGTH_SHORT).show();
                 } else {
                     try{
-                        Service toAdd = new Service(editText.getText().toString(), Integer.parseInt(editText2.getText().toString()), services.get(position).getUid());
+                        Service toAdd = new Service(editText.getText().toString(), Double.parseDouble(editText2.getText().toString()), services.get(position).getUid());
                         databaseServices.child(services.get(position).getUid()).setValue(toAdd);
                         dialog.dismiss();
                     } catch (NumberFormatException e) {
