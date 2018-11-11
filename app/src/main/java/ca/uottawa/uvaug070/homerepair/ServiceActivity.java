@@ -203,10 +203,3 @@ public class ServiceActivity extends AppCompatActivity{
     }
 
 }
-
-
-
-
-
-
-
