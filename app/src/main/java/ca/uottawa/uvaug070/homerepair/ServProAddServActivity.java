@@ -86,7 +86,7 @@ public class ServProAddServActivity extends AppCompatActivity {
         });
 
         servaddview.setOnTouchListener(new View.OnTouchListener() {
-            @Override
+                @Override
             public boolean onTouch(View v, MotionEvent event) {
                 v.getParent().requestDisallowInterceptTouchEvent(true);
                 return false;

@@ -21,6 +21,7 @@
         <activity android:name=".ServiceActivity"></activity>
         <activity android:name=".ServProActivity"></activity>
         <activity android:name=".ServProAddServActivity"></activity>
+        <activity android:name=".ServiceNavigation"></activity>
     </application>
 
 </manifest>

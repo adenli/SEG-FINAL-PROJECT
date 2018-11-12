@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">HomeRepair</string>
+    <string name="Open">HomeRepair</string>
+    <string name="Close">HomeRepair</string>
 </resources>
