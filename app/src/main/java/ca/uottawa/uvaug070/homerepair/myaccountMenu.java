@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.google.firebase.database.DatabaseReference;
 
@@ -36,13 +38,10 @@ public class myaccountMenu extends Fragment {
         EditText address = (EditText) view.findViewById(R.id.address);
         EditText description = (EditText) view.findViewById(R.id.description);
         EditText phone = (EditText) view.findViewById(R.id.phone);
-
-
-
-
-
-
-
+        Spinner spin = (Spinner) view.findViewById(R.id.select);
+        String[] Spinnerlist={"YES","NO"};
+        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,Spinnerlist);
+        spin.setAdapter(arrayAdapter);
 
         return view;
 
