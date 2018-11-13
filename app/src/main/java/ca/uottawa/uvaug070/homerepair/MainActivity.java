@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 if (temp instanceof ServiceProvider){
                     intent = new Intent(getApplicationContext(),ServiceNavigation.class);
                 }
-                
+
                 intent.putExtra("username",temp.getUsername());
                 String role;
                 if (temp instanceof Admin){

@@ -1,16 +1,15 @@
 package ca.uottawa.uvaug070.homerepair;
 
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 
 
@@ -32,44 +31,13 @@ public class ServiceNavigation extends AppCompatActivity {
         t.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         nv = (NavigationView) findViewById(R.id.nv);
-        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                Class<myaccountMenu> fragmentClass;
-                switch (id) {
-                    case R.id.account:
-                        Toast.makeText(ServiceNavigation.this, "My Account", Toast.LENGTH_SHORT).show();  //IN THE CASE THAT ACCOUNT IN THE MENU WAS PRESSED THIS WILL RUN
-                        fragmentClass=myaccountMenu.class;
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        try {
-                            fragmentManager.beginTransaction().replace(R.id.activity_main, fragmentClass.newInstance()).commit();
-                            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_main);
-                            drawer.closeDrawer(GravityCompat.START);
-
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
-                        } catch (InstantiationException e) {
-                            e.printStackTrace();
-                        }
-
-                    case R.id.availability:
-                        Toast.makeText(ServiceNavigation.this, "Settings", Toast.LENGTH_SHORT).show();
-                    case R.id.settings:
-                        Toast.makeText(ServiceNavigation.this, "Settings", Toast.LENGTH_SHORT).show();
-                    case R.id.logout:
-                        Toast.makeText(ServiceNavigation.this, "", Toast.LENGTH_SHORT).show();
-                    default:
-                        return true;
-                }
-
-            }
-        });
+        setupDrawerContent(nv);
 
 
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -82,4 +50,64 @@ public class ServiceNavigation extends AppCompatActivity {
 
 
 
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });}
+
+    private void selectDrawerItem(MenuItem menuItem) {
+
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+        Fragment fragment = null;
+        Class fragmentClass;
+        switch(menuItem.getItemId()) {
+            case R.id.services:
+                fragmentClass=serviceMenu.class;
+                break;
+            case R.id.account:
+                fragmentClass = myaccountMenu.class;
+                break;
+            case R.id.availability:
+                fragmentClass = availabilityMenu.class;
+                break;
+            case R.id.settings:
+                fragmentClass = availabilityMenu.class;
+                break;
+            case R.id.logout:
+
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+                finish();
+            default:
+                fragmentClass = myaccountMenu.class;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.drawer, fragment).commit();
+
+        // Highlight the selected item has been done by NavigationView
+
+        // Set action bar title
+        setTitle(menuItem.getTitle());
+        // Close the navigation drawer
+        dl.closeDrawers();
+
+    }
 }
+
+
+
+
+

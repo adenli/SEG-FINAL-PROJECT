@@ -3,6 +3,8 @@
 
     <item android:id="@+id/account"
         android:title="My Account"/>
+    <item android:id="@+id/services"
+        android:title="Services"/>
     <item android:id="@+id/availability"
         android:title="Availability"/>
     <item android:id="@+id/settings"
