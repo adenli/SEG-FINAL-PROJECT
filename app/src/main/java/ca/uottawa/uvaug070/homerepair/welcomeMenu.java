@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 
@@ -25,6 +26,7 @@ public class welcomeMenu extends Fragment {
     DatabaseReference databaseServPro;
     ListView servaddview;
     List<Service> services;
+    TextView tv;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class welcomeMenu extends Fragment {
         super.onCreate(savedInstanceState);
         String a = getCurrentTime(view);
         a="eatdick";
-
+        tv=(TextView) view.findViewById(R.id.role_message); //add set text
 
         return view;
         //this will initialize the layout of the activity servproaddserv
@@ -47,6 +49,7 @@ public class welcomeMenu extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Welcome!");
+
 
     }
 
