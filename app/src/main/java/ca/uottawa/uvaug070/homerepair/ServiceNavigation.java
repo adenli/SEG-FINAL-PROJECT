@@ -31,13 +31,20 @@ public class ServiceNavigation extends AppCompatActivity {
         t.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        welcomeMenu a= new welcomeMenu();
+        setFragment(a);
         nv = (NavigationView) findViewById(R.id.nv);
+
         setupDrawerContent(nv);
-
-
     }
 
-
+    public void setFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.drawer, fragment)
+                .commit();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
