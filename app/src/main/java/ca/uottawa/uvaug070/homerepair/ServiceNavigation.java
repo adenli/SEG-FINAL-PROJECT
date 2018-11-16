@@ -113,8 +113,3 @@ public class ServiceNavigation extends AppCompatActivity {
 
     }
 }
-
-
-
-
-

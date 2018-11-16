@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -8,10 +10,47 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <CalendarView
-            android:id="@+id/calendarView"
+        <Switch
+            android:id="@+id/monday"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Monday" />
+
+        <Switch
+            android:id="@+id/tuesday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tuesday" />
+
+        <Switch
+            android:id="@+id/wednesday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Wednesday" />
+
+        <Switch
+            android:id="@+id/thursday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thursday" />
+
+        <Switch
+            android:id="@+id/friday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Friday" />
+
+        <Switch
+            android:id="@+id/saturday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Saturday" />
+
+        <Switch
+            android:id="@+id/sunday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sunday" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
