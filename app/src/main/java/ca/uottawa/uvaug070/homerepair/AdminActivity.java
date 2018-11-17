@@ -11,18 +11,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import static android.widget.AdapterView.*;
+import static android.widget.AdapterView.OnClickListener;
 
 public class AdminActivity extends AppCompatActivity {
     ListView listView;
@@ -53,8 +52,6 @@ public class AdminActivity extends AppCompatActivity {
 
 
     }
-
-
     protected void onStart() {
         super.onStart();
         databaseAccounts.addValueEventListener(new ValueEventListener() {
@@ -81,7 +78,7 @@ public class AdminActivity extends AppCompatActivity {
                 }
                 if (!adminExists) {
                     String id = databaseAccounts.push().getKey();
-                    Admin account = new Admin("admin", "admin", Role.ADMIN);
+                    Admin account = new Admin("admin", "admin", Role.ADMIN, id);
                     databaseAccounts.child(id).setValue(account);
                 }
                 listCreate();

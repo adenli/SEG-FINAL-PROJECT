@@ -4,10 +4,12 @@ public class Account {
     String username;
     String password;
     Role role;
-    public Account(String username, String password, Role role) {
+    String uid;
+    public Account(String username, String password, Role role, String uid) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.uid = uid;
     }
     public Account() {
 
@@ -26,4 +28,10 @@ public class Account {
     }
     public Role getRole() {return role;}
     public void setRole(Role role) {this.role = role;}
+    public String getUid() {
+        return uid;
+    }
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 }

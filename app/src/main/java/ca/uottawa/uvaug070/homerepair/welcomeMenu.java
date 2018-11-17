@@ -6,13 +6,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -20,31 +20,25 @@ import java.util.List;
  */
 
 
-public class myaccountMenu extends Fragment {
+public class welcomeMenu extends Fragment {
 
     DatabaseReference databaseServices;
     DatabaseReference databaseServPro;
     ListView servaddview;
     List<Service> services;
+    TextView tv;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //returning our layout file
         //change R.layout.yourlayoutfilename for each of your fragments
-        View view=inflater.inflate(R.layout.fragment_serviceproviderinfo, container, false);
+        View view=inflater.inflate(R.layout.activity_welcome_menu, container, false);
         super.onCreate(savedInstanceState);
-
-        EditText name = (EditText) view.findViewById(R.id.name);
-        EditText address = (EditText) view.findViewById(R.id.address);
-        EditText description = (EditText) view.findViewById(R.id.description);
-        EditText phone = (EditText) view.findViewById(R.id.phone);
-        Spinner spin = (Spinner) view.findViewById(R.id.select);
-        String[] Spinnerlist={"YES","NO"};
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,Spinnerlist);
-        spin.setAdapter(arrayAdapter);
+        String a = getCurrentTime(view);
+        a="eatdick";
+        tv=(TextView) view.findViewById(R.id.role_message); //add set text
 
         return view;
-
         //this will initialize the layout of the activity servproaddserv
         // you must add the functionality of the servproaddserv here ex: pulling list from firebase etc
     }
@@ -54,7 +48,16 @@ public class myaccountMenu extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("Edit information");
+        getActivity().setTitle("Welcome!");
+
 
     }
+
+    public String getCurrentTime(View view) {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+        String strDate = "Current Time : " + mdformat.format(calendar.getTime());
+
+        return strDate;
     }
+}
