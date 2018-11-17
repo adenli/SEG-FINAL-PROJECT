@@ -49,8 +49,6 @@ public class welcomeMenu extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Welcome!");
-
-
     }
 
     public String getCurrentTime(View view) {
