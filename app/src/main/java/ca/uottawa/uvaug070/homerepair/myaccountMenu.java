@@ -35,6 +35,18 @@ public class myaccountMenu extends Fragment {
         View view=inflater.inflate(R.layout.fragment_serviceproviderinfo, container, false);
         super.onCreate(savedInstanceState);
         Button confirmButton = (Button) view.findViewById(R.id.confirm);
+        EditText name = (EditText) view.findViewById(R.id.name);
+        name.setText("insert serviceprovider company name here");
+        EditText address = (EditText) view.findViewById(R.id.address);
+        address.setText("insert serviceprovider address here");
+        EditText description = (EditText) view.findViewById(R.id.description);
+        description.setText("insert serviceprovider description here");
+        EditText phone = (EditText) view.findViewById(R.id.phone);
+        phone.setText("insert serviceprovider phone number here");
+        Spinner spin = (Spinner) view.findViewById(R.id.select);
+        String[] spinnerList={"YES","NO"};
+        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,spinnerList);
+        spin.setAdapter(arrayAdapter);
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override

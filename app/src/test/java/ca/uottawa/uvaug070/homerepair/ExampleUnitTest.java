@@ -44,16 +44,19 @@ public class ExampleUnitTest {
     @Test
     public void checkProfileAddress(){
         Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555");
-        assertEquals("Check that the proper profile address is output","19 Brian Crescent", testProfile.getAddress());
+        ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
+        assertEquals("Check that the proper profile address is output","19 Brian Crescent", testServiceProvider.getServiceProviderProfile().getAddress());
     }
     @Test
     public void checkProfilePhoneNum(){
         Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555");
-        assertEquals("Check that the proper profile phone number is output","6125555555", testProfile.getPhoneNumber());
+        ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
+        assertEquals("Check that the proper profile phone number is output","6125555555", testServiceProvider.getServiceProviderProfile().getPhoneNumber());
     }
     @Test
     public void checkProfileCompanyName() {
         Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555");
-        assertEquals("Check that the proper profile com is output", "SegProject", testProfile.getCompanyName());
+        ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
+        assertEquals("Check that the proper profile com is output", "SegProject", testServiceProvider.getServiceProviderProfile().getCompanyName());
     }
 }
