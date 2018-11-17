@@ -41,4 +41,19 @@ public class ExampleUnitTest {
         Service testService = new Service("Plumbing",4,"A2hI");
         assertEquals("Check that the proper username is output","A2hI", testService.getUid());
     }
+    @Test
+    public void checkProfileAddress(){
+        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555");
+        assertEquals("Check that the proper profile address is output","19 Brian Crescent", testProfile.getAddress());
+    }
+    @Test
+    public void checkProfilePhoneNum(){
+        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555");
+        assertEquals("Check that the proper profile phone number is output","6125555555", testProfile.getPhoneNumber());
+    }
+    @Test
+    public void checkProfileCompanyName() {
+        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555");
+        assertEquals("Check that the proper profile com is output", "SegProject", testProfile.getCompanyName());
+    }
 }
