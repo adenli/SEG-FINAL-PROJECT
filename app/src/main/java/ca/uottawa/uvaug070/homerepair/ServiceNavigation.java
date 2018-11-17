@@ -18,6 +18,7 @@ public class ServiceNavigation extends AppCompatActivity {
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,8 @@ public class ServiceNavigation extends AppCompatActivity {
         t.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Bundle extras = getIntent().getExtras();
+        username = extras.getString("username");
 
         welcomeMenu a= new welcomeMenu();
         setFragment(a);
@@ -70,47 +73,91 @@ public class ServiceNavigation extends AppCompatActivity {
     private void selectDrawerItem(MenuItem menuItem) {
 
         // Create a new fragment and specify the fragment to show based on nav item clicked
-        Fragment fragment = null;
-        Class fragmentClass;
         switch(menuItem.getItemId()) {
             case R.id.services:
-                fragmentClass=serviceMenu.class;
+                try{
+                    serviceMenu fragment = serviceMenu.class.newInstance();
+                    fragment.setUsername(username);
+                    // Insert the fragment by replacing any existing fragment
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.drawer, fragment).commit();
+
+                    // Highlight the selected item has been done by NavigationView
+
+                    // Set action bar title
+                    setTitle(menuItem.getTitle());
+                    // Close the navigation drawer
+                    dl.closeDrawers();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.account:
-                fragmentClass = myaccountMenu.class;
+                try{
+                    myaccountMenu fragment = myaccountMenu.class.newInstance();
+                    // Insert the fragment by replacing any existing fragment
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.drawer, fragment).commit();
+
+                    // Highlight the selected item has been done by NavigationView
+
+                    // Set action bar title
+                    setTitle(menuItem.getTitle());
+                    // Close the navigation drawer
+                    dl.closeDrawers();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.availability:
-                fragmentClass = availabilityMenu.class;
+                try{
+                    availabilityMenu fragment = availabilityMenu.class.newInstance();
+                    // Insert the fragment by replacing any existing fragment
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.drawer, fragment).commit();
+
+                    // Highlight the selected item has been done by NavigationView
+
+                    // Set action bar title
+                    setTitle(menuItem.getTitle());
+                    // Close the navigation drawer
+                    dl.closeDrawers();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.settings:
-                fragmentClass = availabilityMenu.class;
+                try{
+                    availabilityMenu fragment = availabilityMenu.class.newInstance();
+                    // Insert the fragment by replacing any existing fragment
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.drawer, fragment).commit();
+
+                    // Highlight the selected item has been done by NavigationView
+
+                    // Set action bar title
+                    setTitle(menuItem.getTitle());
+                    // Close the navigation drawer
+                    dl.closeDrawers();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.logout:
 
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(intent);
                 finish();
-            default:
-                fragmentClass = myaccountMenu.class;
+                break;
         }
-
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.drawer, fragment).commit();
-
-        // Highlight the selected item has been done by NavigationView
-
-        // Set action bar title
-        setTitle(menuItem.getTitle());
-        // Close the navigation drawer
-        dl.closeDrawers();
-
     }
 }
 

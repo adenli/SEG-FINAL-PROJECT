@@ -33,8 +33,9 @@ public class serviceMenu extends Fragment {
     DatabaseReference databaseServPro;
     ListView servaddview;
     List<Service> services;
-
+    private String username;
     ListView myservaddview;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -175,7 +176,7 @@ public class serviceMenu extends Fragment {
         createList();
         return true;
     }
-
-
-
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
