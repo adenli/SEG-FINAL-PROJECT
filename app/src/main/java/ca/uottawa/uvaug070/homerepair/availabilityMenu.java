@@ -2,20 +2,21 @@ package ca.uottawa.uvaug070.homerepair;
 
 
 import android.annotation.SuppressLint;
-import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
-import java.util.Calendar;
+import com.mcsoft.timerangepickerdialog.RangeTimePickerDialog;
 
-public class availabilityMenu extends Fragment {
+public class availabilityMenu extends Fragment implements RangeTimePickerDialog.ISelectedTime {
 
 
    private Boolean switchState;
@@ -48,6 +49,8 @@ public class availabilityMenu extends Fragment {
         Switch simpleSwitch5 = (Switch) getActivity().findViewById(R.id.saturday);
         Switch simpleSwitch6 = (Switch) getActivity().findViewById(R.id.sunday);
 
+        final EditText ass = (EditText) getActivity().findViewById(R.id.ass);
+
 //        final Boolean switchState = simpleSwitch.isChecked(); //0 being monday and 6 being sunday
 //        Boolean switchState1 = simpleSwitch1.isChecked();
 //        Boolean switchState2 = simpleSwitch2.isChecked();
@@ -71,20 +74,24 @@ public class availabilityMenu extends Fragment {
             @SuppressLint("ResourceType")
             @Override
             public void onCheckedChanged(CompoundButton cb, boolean on){
-                if(on)
-                {
-                    Calendar mcurrentTime = Calendar.getInstance();
-                    int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                    int minute = mcurrentTime.get(Calendar.MINUTE);
-                    TimePickerDialog mTimePicker = null;
+                if(on) {
 
+                    // Get Current Time
+//                    final Calendar c = Calendar.getInstance();
+//                    int mHour = c.get(Calendar.HOUR_OF_DAY);
+//                    int mMinute = c.get(Calendar.MINUTE);
+//                    DialogFragment newFragment = new timepickerfragment();
+//                    newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                    RangeTimePickerDialog dialog = new RangeTimePickerDialog();
+                    dialog.newInstance();
+                    dialog.setRadiusDialog(20); // Set radius of dialog (default is 50)
+                    dialog.setIs24HourView(true); // Indicates if the format should be 24 hours
+                    dialog.setColorBackgroundHeader(R.color.colorPrimary); // Set Color of Background header dialog
+                    dialog.setColorTextButton(R.color.colorPrimaryDark); // Set Text color of button
+                    FragmentManager fragmentManager = getFragmentManager();
 
+                    dialog.show(getActivity().getFragmentManager(),"");
 
-                    DialogFragment dialog = (DialogFragment) DialogFragment.instantiate(getActivity(), "timepickerfragment");
-                    dialog.show(getActivity().getSupportFragmentManager(), "dialog");
-//
-//                    timepickerfragment dialog = new timepickerfragment();
-//                    dialog.show(getChildFragmentManager(), "timepicker_fragment");
                 }
                 else
                 {
@@ -97,5 +104,8 @@ public class availabilityMenu extends Fragment {
     }
 
 
-
+    @Override
+    public void onSelectedTime(int i, int i1, int i2, int i3) {
+        Toast.makeText(getActivity(), "Start", Toast.LENGTH_SHORT).show();
+    }
 }

@@ -52,5 +52,10 @@
             android:layout_height="wrap_content"
             android:text="Sunday" />
 
+        <EditText
+            android:id="@+id/ass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
