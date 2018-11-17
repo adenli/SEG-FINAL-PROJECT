@@ -7,7 +7,20 @@ public class ServiceProvider extends Account {
     public ServiceProvider(String username, String password, Role role) {
         super(username, password, role);
     }
+    public ServiceProvider(String username, String password, Role role, ArrayList<Service> services) {
+        super(username, password, role);
+        this.services = services;
+    }
     public ServiceProvider(){
         super();
+    }
+    public ArrayList<Service> getServices() {
+        return services;
+    }
+    public void addService(Service toAdd) {
+        services.add(toAdd);
+    }
+    public boolean removeService(Service toRemove) {
+        return services.remove(toRemove);
     }
 }
