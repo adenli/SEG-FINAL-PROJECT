@@ -1,6 +1,7 @@
 package ca.uottawa.uvaug070.homerepair;
 
 public class Profile {
+    private String companyName,address,phoneNumber;
     private String description=null;
     private Boolean licensed=null;
     public Profile(String name,String address,String phoneNum,String description,Boolean licensed){
