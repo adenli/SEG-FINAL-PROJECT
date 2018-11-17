@@ -28,8 +28,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.datatype.Duration;
-
 public class ServiceActivity extends AppCompatActivity{
     DatabaseReference databaseServices;
     ListView serviceview;
@@ -66,12 +64,7 @@ public class ServiceActivity extends AppCompatActivity{
                 }
             }
         });
-
-
-
-
     }
-
 
     private void addService(String name, double rate) {
         if (rate < 0) {

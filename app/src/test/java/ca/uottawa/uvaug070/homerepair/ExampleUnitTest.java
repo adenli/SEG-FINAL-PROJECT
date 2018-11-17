@@ -13,13 +13,18 @@ public class ExampleUnitTest {
 
     @Test
     public void checkAccountPassword() {
-        Account testAccount = new Account("simon","cat",Role.ADMIN);
+        Account testAccount = new Account("simon","cat",Role.ADMIN,"abcde");
         assertEquals("Check that the proper password is output","cat", testAccount.getPassword());
     }
     @Test
     public void checkAccountUsername() {
-        Account testAccount = new Account("simon","cat",Role.ADMIN);
+        Account testAccount = new Account("simon","cat",Role.ADMIN,"abcde");
         assertEquals("Check that the proper username is output","simon", testAccount.getUsername());
+    }
+    @Test
+    public void checkAccountUid() {
+        Account testAccount = new Account("simon","cat",Role.ADMIN,"abcde");
+        assertEquals("Check that the proper uid is output","abcde", testAccount.getUid());
     }
     @Test
     public void checkServiceName() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,20 +11,36 @@
         <TextView
             android:id="@+id/servProWelc"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:gravity="left"
-            android:text="Services:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+            android:text="All Services:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
         <ListView
             android:id="@+id/servaddview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="195dp"
+            android:layout_weight="1">
+
+        </ListView>
+
+        <TextView
+            android:id="@+id/myservProWelc"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="My services"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+        <ListView
+            android:id="@+id/myservaddview"
+            android:layout_width="match_parent"
+            android:layout_height="195dp"
             android:layout_weight="1">
 
         </ListView>
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</ScrollView>
