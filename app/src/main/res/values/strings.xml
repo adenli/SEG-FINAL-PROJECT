@@ -6,8 +6,8 @@
 
 
     <string-array name="spinner_list">
-        <item>Opening time</item>
-        <item>Closing time</item>
+        <item>Set Opening Time</item>
+        <item>Set Closing Time</item>
     </string-array>
 
 

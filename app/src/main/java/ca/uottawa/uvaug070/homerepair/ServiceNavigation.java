@@ -55,8 +55,6 @@ public class ServiceNavigation extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {

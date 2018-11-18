@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -35,10 +34,10 @@ public class availabilityMenu extends Fragment {
         Spinner spin4= view.findViewById(R.id.spinner4);
         Spinner spin5= view.findViewById(R.id.spinner5);
         Spinner spin6= view.findViewById(R.id.spinner6);
-        String[] Spinnerlist={"Opening time","Closing time"};
+//        String[] Spinnerlist={"Opening time","Closing time"};
 
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,Spinnerlist);
-        spin.setAdapter(arrayAdapter);
+//        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,Spinnerlist);
+//        spin.setAdapter(arrayAdapter);
         spin.setEnabled(false);
         spin1.setEnabled(false);
         spin2.setEnabled(false);
@@ -164,7 +163,7 @@ public class availabilityMenu extends Fragment {
         Spinner spin2 = (Spinner) getActivity().findViewById(R.id.spinner2);
         Switch simpleSwitch2 = (Switch) getActivity().findViewById(R.id.wednesday);
         simpleSwitch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-            Spinner spin2 = (Spinner) getActivity().findViewById(R.id.spinner);
+            Spinner spin2 = (Spinner) getActivity().findViewById(R.id.spinner2);
 
             final EditText ass = (EditText) getActivity().findViewById(R.id.ass);
             @SuppressLint("ResourceType")
@@ -209,7 +208,7 @@ public class availabilityMenu extends Fragment {
         });
         Spinner spin3 = (Spinner) getActivity().findViewById(R.id.spinner3);
         Switch simpleSwitch3 = (Switch) getActivity().findViewById(R.id.thursday);
-        simpleSwitch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+        simpleSwitch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             Spinner spin3 = (Spinner) getActivity().findViewById(R.id.spinner3);
 
             final EditText ass = (EditText) getActivity().findViewById(R.id.ass);
@@ -303,7 +302,7 @@ public class availabilityMenu extends Fragment {
 
         Spinner spin5 = (Spinner) getActivity().findViewById(R.id.spinner5);
         Switch simpleSwitch5 = (Switch) getActivity().findViewById(R.id.saturday);
-        simpleSwitch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+        simpleSwitch5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             Spinner spin5 = (Spinner) getActivity().findViewById(R.id.spinner5);
 
             final EditText ass = (EditText) getActivity().findViewById(R.id.ass);
@@ -344,6 +343,54 @@ public class availabilityMenu extends Fragment {
 
                 else{
                     spin5.setEnabled(false);
+                }
+            }
+        });
+
+
+        Spinner spin6 = (Spinner) getActivity().findViewById(R.id.spinner6);
+        Switch simpleSwitch6 = (Switch) getActivity().findViewById(R.id.sunday);
+        simpleSwitch6.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            Spinner spin6 = (Spinner) getActivity().findViewById(R.id.spinner6);
+
+            final EditText ass = (EditText) getActivity().findViewById(R.id.ass);
+            @SuppressLint("ResourceType")
+            @Override
+            public void onCheckedChanged(CompoundButton cb, boolean on){
+                if(on) {
+
+                    spin6.setEnabled(true);
+                    // Get Current Time
+                    final Calendar c = Calendar.getInstance();
+                    int mHour = c.get(Calendar.HOUR_OF_DAY);
+                    int mMinute = c.get(Calendar.MINUTE);
+
+                    spin6.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            Object value = parent.getItemAtPosition(position);
+                            switch (position) {
+                                case 0:
+                                    DialogFragment newFragment = new timepickerfragment();
+                                    newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    break;
+                                case 1:
+                                    newFragment = new timepickerfragment();
+                                    newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    break;
+                            }
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+
+                    });
+                }
+
+                else{
+                    spin6.setEnabled(false);
                 }
             }
         });
