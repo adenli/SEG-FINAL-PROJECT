@@ -189,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (temp instanceof ServiceProvider){
                     intent = new Intent(getApplicationContext(),ServiceNavigation.class);
+                    intent.putExtra("uid",temp.uid);
                 }
 
                 intent.putExtra("username",temp.getUsername());
@@ -199,6 +200,8 @@ public class MainActivity extends AppCompatActivity {
                     role="HomeOwner";
                 }else{
                     role="ServiceProvider";
+                   /* Profile myProfile= new Profile(null,null,null);
+                    intent.putExtra("myProfile", myProfile);*/
                 }
                 intent.putExtra("role",role);
 

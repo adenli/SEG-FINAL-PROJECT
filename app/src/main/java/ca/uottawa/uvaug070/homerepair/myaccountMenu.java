@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class myaccountMenu extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        databaseServPro = FirebaseDatabase.getInstance().getReference("accounts");
+        //databaseServPro.child(uid);
         //returning our layout file
         //change R.layout.yourlayoutfilename for each of your fragments
         View view=inflater.inflate(R.layout.fragment_serviceproviderinfo, container, false);
@@ -84,5 +87,7 @@ public class myaccountMenu extends Fragment {
         else {
             myProfile= new Profile(name.toString(),address.toString(),phone.toString(),description.toString(),false);
         }
+
+
     }
 }

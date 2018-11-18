@@ -28,6 +28,7 @@ public class Profile {
         this.address=address;
         this.phoneNumber=phoneNum;
     }
+    public Profile (){}
     public String getCompanyName(){
         return this.companyName;
     }

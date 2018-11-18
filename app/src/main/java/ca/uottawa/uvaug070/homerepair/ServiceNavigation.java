@@ -19,6 +19,7 @@ public class ServiceNavigation extends AppCompatActivity {
     private ActionBarDrawerToggle t;
     private NavigationView nv;
     private String username;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class ServiceNavigation extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle extras = getIntent().getExtras();
         username = extras.getString("username");
+        uid = extras.getString("uid");
+
 
         welcomeMenu a= new welcomeMenu();
         setFragment(a);
@@ -96,6 +99,7 @@ public class ServiceNavigation extends AppCompatActivity {
                 break;
             case R.id.account:
                 try{
+
                     myaccountMenu fragment = myaccountMenu.class.newInstance();
                     // Insert the fragment by replacing any existing fragment
                     FragmentManager fragmentManager = getSupportFragmentManager();
