@@ -623,6 +623,7 @@ public class availabilityMenu extends Fragment {
 
                 Bundle b = getArguments();
                 String a= b.getString("uid");
+                availibilityUID.child(a).removeValue();
                 while (iterator.hasNext()){
                     String temp = iterator.next();
                     String uid = availibilityUID.push().getKey();
@@ -631,6 +632,12 @@ public class availabilityMenu extends Fragment {
                 }
                 button.setAlpha(.5f);
                 button.setClickable(false);
+                ListView tv1= (ListView) getActivity().findViewById(R.id.availlist);
+
+                ArrayAdapter arrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.simple_list_item_1,availability);
+
+                tv1.setAdapter(arrayAdapter2);
+
             }
         });
     }}
