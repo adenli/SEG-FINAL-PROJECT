@@ -2,52 +2,33 @@ package ca.uottawa.uvaug070.homerepair;
 
 public class Profile {
     private String companyName,address,phoneNumber;
-    private String description=null;
-    private Boolean licensed=null;
-    public Profile(String name,String address,String phoneNum,String description,Boolean licensed){
+    private String description;
+    private boolean licensed;
+    public Profile(String name,String address,String phoneNum,String description,boolean licensed){
         this.companyName=name;
         this.address=address;
         this.phoneNumber=phoneNum;
         this.description=description;
         this.licensed=licensed;
-    }
-    public Profile(String name,String address,String phoneNum,Boolean licensed){
-        this.companyName=name;
-        this.address=address;
-        this.phoneNumber=phoneNum;
-        this.licensed=licensed;
-    }
-    public Profile(String name,String address,String phoneNum,String description){
-        this.companyName=name;
-        this.address=address;
-        this.phoneNumber=phoneNum;
-        this.description=description;
-    }
-    public Profile(String name,String address,String phoneNum){
-        this.companyName=name;
-        this.address=address;
-        this.phoneNumber=phoneNum;
     }
     public Profile (){}
     public String getCompanyName(){
-        return this.companyName;
+        return companyName;
     }
 
     public String getAddress() {
-        return this.address;
+        return address;
     }
 
     public String getPhoneNumber() {
-        return this.phoneNumber;
+        return phoneNumber;
     }
 
-    public Boolean isLicensed() {
-        if(this.licensed!=null) {return this.licensed;}
-        return false;
+    public boolean getLicensed() {
+        return licensed;
     }
 
     public String getDescription() {
-        if(description==null){return "";}
         return description;
     }
     public void setCompanyName(String name){
@@ -62,7 +43,7 @@ public class Profile {
     public void setDescription(String description){
         this.description=description;
     }
-    public void setLicensed(Boolean licensed){
+    public void setLicensed(boolean licensed){
         this.licensed=licensed;
     }
 }

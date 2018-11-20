@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,38 +30,33 @@ import static android.content.ContentValues.TAG;
 
 
 public class myaccountMenu extends Fragment {
-
-    DatabaseReference databaseServices;
     DatabaseReference databaseServPro;
     ListView servaddview;
     List<Service> services;
-    String uid="";
+    String uid;
+    EditText name;
+    EditText address;
+    EditText phone;
+    EditText descr;
+    Spinner spin;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final View view=inflater.inflate(R.layout.fragment_serviceproviderinfo, container, false);
-        databaseServPro = FirebaseDatabase.getInstance().getReference("accounts");
         Bundle myBundle=getArguments();
         //getting uid to get proper database reference
         uid=myBundle.getString("uid");
-
+        databaseServPro = FirebaseDatabase.getInstance().getReference("accounts").child(uid);
         //gets all valueus from edittext
-        EditText name=(EditText) view.findViewById(R.id.name);
-        EditText address=(EditText) view.findViewById(R.id.address);
-        EditText phone=(EditText) view.findViewById(R.id.phone);
-        EditText descr=(EditText) view.findViewById(R.id.description);
-        Spinner spin = (Spinner) view.findViewById(R.id.select);
+        name=(EditText) view.findViewById(R.id.name);
+        address=(EditText) view.findViewById(R.id.address);
+        phone=(EditText) view.findViewById(R.id.phone);
+        descr=(EditText) view.findViewById(R.id.description);
+        spin = (Spinner) view.findViewById(R.id.select);
         String[] Spinnerlist={"YES","NO"};
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,Spinnerlist);
         spin.setAdapter(arrayAdapter);
-        Boolean spinnerThing=true;
-        if (spin.toString()=="YES"){
-            spinnerThing=true;
-        }
-        //right now when i press the button it assigns all the values to "" (blank string not null)
-        //need to change so that it will update to the actual values
-        final Profile myProfile= new Profile(name.getText().toString(),address.getText().toString(),phone.getText().toString(),descr.getText().toString(),spinnerThing);
 
         Button confirmButton = (Button) view.findViewById(R.id.confirm);
 
@@ -68,15 +64,27 @@ public class myaccountMenu extends Fragment {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseServPro.child(uid).child("Profile").setValue(myProfile);
+
+                confirm();
+
             }
         });
+
         return view;
 
         //this will initialize the layout of the activity servproaddserv
         // you must add the functionality of the servproaddserv here ex: pulling list from firebase etc
     }
 
+    private void confirm() {
+        boolean spinnerThing=false;
+        if (spin.getSelectedItem().toString().equals("YES")){
+            spinnerThing=true;
+        }
+        Profile myProfile= new Profile(name.getText().toString(),address.getText().toString(),phone.getText().toString(),descr.getText().toString(),spinnerThing);
+        databaseServPro.child("Profile").setValue(myProfile);
+        Toast.makeText(getActivity().getApplicationContext(), "Profile updated!", Toast.LENGTH_LONG).show();
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -85,5 +93,30 @@ public class myaccountMenu extends Fragment {
         getActivity().setTitle("Edit information");
 
 
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        databaseServPro.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Profile updated = dataSnapshot.child("Profile").getValue(Profile.class);
+                if(updated != null) {
+                    name.setText(updated.getCompanyName());
+                    address.setText(updated.getAddress());
+                    descr.setText(updated.getDescription());
+                    phone.setText(updated.getPhoneNumber());
+                    if(updated.getLicensed()) {
+                        spin.setSelection(0, true);
+                    } else {
+                        spin.setSelection(1, true);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
