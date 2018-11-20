@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 String id = databaseAccounts.push().getKey();
                 ServiceProvider account = new ServiceProvider(username, password, Role.SERVICEPROVIDER, id);
                 databaseAccounts.child(id).setValue(account);
+                databaseAccounts.child(id).child("services").setValue(null);
                 ((EditText)findViewById(R.id.editTextName)).setText("");
                 ((EditText)findViewById(R.id.editTextPassword)).setText("");
                 Toast.makeText(this, "Account created", Toast.LENGTH_LONG).show();
