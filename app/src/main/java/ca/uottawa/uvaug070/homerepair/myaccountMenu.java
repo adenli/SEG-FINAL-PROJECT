@@ -66,6 +66,7 @@ public class myaccountMenu extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(), "Address invalid", Toast.LENGTH_SHORT).show();
                 } else {
                     //update or add to database
+                    Toast.makeText(getActivity().getApplicationContext(), "Data saved", Toast.LENGTH_SHORT).show();
                 }
             }
         });
