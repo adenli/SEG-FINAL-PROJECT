@@ -630,8 +630,7 @@ public class availabilityMenu extends Fragment {
                     availibilityUID.child(a).child(uid).setValue(temp);
                     //availibilityDatabase.child(id).setValue(temp);
                 }
-                button.setAlpha(.5f);
-                button.setClickable(false);
+
                 ListView tv1= (ListView) getActivity().findViewById(R.id.availlist);
 
                 ArrayAdapter arrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.simple_list_item_1,availability);
