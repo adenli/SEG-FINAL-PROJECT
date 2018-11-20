@@ -97,6 +97,7 @@ public class ServiceNavigation extends AppCompatActivity {
                     myaccountMenu fragment = myaccountMenu.class.newInstance();
                     // Insert the fragment by replacing any existing fragment
                     FragmentManager fragmentManager = getSupportFragmentManager();
+
                     fragmentManager.beginTransaction().replace(R.id.drawer, fragment).commit();
 
                     // Highlight the selected item has been done by NavigationView
@@ -113,9 +114,16 @@ public class ServiceNavigation extends AppCompatActivity {
                 break;
             case R.id.availability:
                 try{
+                    Intent intent = getIntent();
+                    String id = intent.getStringExtra("uid");
+                    Bundle bundle= new Bundle();
+                    bundle.putString("uid",id);
                     availabilityMenu fragment = availabilityMenu.class.newInstance();
+                    fragment.setArguments(bundle);
                     // Insert the fragment by replacing any existing fragment
                     FragmentManager fragmentManager = getSupportFragmentManager();
+
+
                     fragmentManager.beginTransaction().replace(R.id.drawer, fragment).commit();
 
                     // Highlight the selected item has been done by NavigationView

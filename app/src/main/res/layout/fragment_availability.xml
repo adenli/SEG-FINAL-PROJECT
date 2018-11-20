@@ -120,7 +120,7 @@
             android:id="@+id/Button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Confirm Availibility" />
+            android:text="Confirm Availibility (Only able to press once)" />
     </LinearLayout>
 
 
