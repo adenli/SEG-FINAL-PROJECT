@@ -9,15 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 
 public class availabilityMenu extends Fragment {
-
+    ArrayList<String> availability = new ArrayList<String>();
 
 
     @Nullable
@@ -46,7 +51,7 @@ public class availabilityMenu extends Fragment {
         spin5.setEnabled(false);
         spin6.setEnabled(false);
 
-        final EditText ass = (EditText) getActivity().findViewById(R.id.ass);
+        ListView ass = getActivity().findViewById(R.id.ass);
 
         return view;
         //this will initialize the layout of the activity servproaddserv
@@ -62,17 +67,61 @@ public class availabilityMenu extends Fragment {
 
     }
 
+    private void search(String day){
+        ArrayList<String> removeList = new ArrayList<>();
+        ListView tv1= (ListView) getActivity().findViewById(R.id.ass);
+        Iterator<String> iterator = availability.iterator();
+
+        Integer counter = -1;
+        while(iterator.hasNext()){
+           String temp = iterator.next();
+            counter = counter + 1;
+           if (temp.toString().contains(day)){
+               removeList.add(temp);
+           }
+        }
+
+        availability.removeAll(removeList);
+        ArrayAdapter arrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.simple_list_item_1,availability);
+
+        tv1.setAdapter(arrayAdapter2);
+    }
+
+    private boolean validatelist(String day){
+        String a = "";
+        String b = "";
+        boolean exists=false;
+        Iterator<String> iterator = availability.iterator();
+        while (iterator.hasNext()){
+            String temp=iterator.next();
+            if (temp.contains(day)&&temp.contains("Closing")){
+                a=temp;
+            }
+            if (temp.contains(day)&&temp.contains("Opening")){
+                b=temp;
+            }
+        }
+
+        if ((a.length()!=0)&&(b.length()!=0)){
+            exists=true;
+        }
+
+        return exists;
+
+    }
+
+
     @Override
     public void onStart() {
 
         super.onStart();
-        Spinner spin = (Spinner) getActivity().findViewById(R.id.spinner);
+
         Switch simpleSwitch = (Switch) getActivity().findViewById(R.id.monday);
 
         simpleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             Spinner spin = (Spinner) getActivity().findViewById(R.id.spinner);
 
-            final EditText ass = (EditText) getActivity().findViewById(R.id.ass);
+
             @SuppressLint("ResourceType")
             @Override
             public void onCheckedChanged(CompoundButton cb, boolean on){
@@ -80,20 +129,39 @@ public class availabilityMenu extends Fragment {
 
                     spin.setEnabled(true);
                     // Get Current Time
-                    final Calendar c = Calendar.getInstance();
-                    int mHour = c.get(Calendar.HOUR_OF_DAY);
-                    int mMinute = c.get(Calendar.MINUTE);
+
 
                     spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            Object value = parent.getItemAtPosition(position);
+
+
                             switch (position) {
                                 case 0:
                                     DialogFragment newFragment = new timepickerfragment();
+                                    boolean a = validatelist("Monday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    Bundle bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Monday");
+                                    bundle.putString("status","Opening");
+                                    newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                                 case 1:
                                     newFragment = new timepickerfragment();
+                                    a = validatelist("Monday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Monday");
+                                    bundle.putString("status","Closing");
+                                    newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                             }
@@ -109,16 +177,18 @@ public class availabilityMenu extends Fragment {
                 }
 
                 else{
+                    search("Monday");
                     spin.setEnabled(false);
+
                 }
             }
         });
-        Spinner spin1 = (Spinner) getActivity().findViewById(R.id.spinner1);
+
         Switch simpleSwitch1 = (Switch) getActivity().findViewById(R.id.tuesday);
         simpleSwitch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             Spinner spin1 = (Spinner) getActivity().findViewById(R.id.spinner1);
 
-            final EditText ass = (EditText) getActivity().findViewById(R.id.ass);
+
             @SuppressLint("ResourceType")
             @Override
             public void onCheckedChanged(CompoundButton cb, boolean on){
@@ -126,20 +196,38 @@ public class availabilityMenu extends Fragment {
 
                     spin1.setEnabled(true);
                     // Get Current Time
-                    final Calendar c = Calendar.getInstance();
-                    int mHour = c.get(Calendar.HOUR_OF_DAY);
-                    int mMinute = c.get(Calendar.MINUTE);
+
 
                     spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            Object value = parent.getItemAtPosition(position);
+
                             switch (position) {
                                 case 0:
                                     DialogFragment newFragment = new timepickerfragment();
+                                    boolean a = validatelist("Tuesday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    Bundle bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Tuesday");
+                                    bundle.putString("status","Opening");
+                                    newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                                 case 1:
                                     newFragment = new timepickerfragment();
+                                    a = validatelist("Tuesday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Tuesday");
+                                    bundle.putString("status","Closing");
+                                    newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                             }
@@ -155,17 +243,18 @@ public class availabilityMenu extends Fragment {
                 }
 
                 else{
+                    search("Tuesday");
                     spin1.setEnabled(false);
                 }
             }
         });
 
-        Spinner spin2 = (Spinner) getActivity().findViewById(R.id.spinner2);
+
         Switch simpleSwitch2 = (Switch) getActivity().findViewById(R.id.wednesday);
         simpleSwitch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             Spinner spin2 = (Spinner) getActivity().findViewById(R.id.spinner2);
 
-            final EditText ass = (EditText) getActivity().findViewById(R.id.ass);
+
             @SuppressLint("ResourceType")
             @Override
             public void onCheckedChanged(CompoundButton cb, boolean on){
@@ -183,10 +272,31 @@ public class availabilityMenu extends Fragment {
                             switch (position) {
                                 case 0:
                                     DialogFragment newFragment = new timepickerfragment();
+                                    boolean a = validatelist("Wednesday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    Bundle bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Wednesday");
+                                    bundle.putString("status","Opening");
+                                    newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                                 case 1:
                                     newFragment = new timepickerfragment();
+                                    a = validatelist("Wednesday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Wednesday");
+                                    bundle.putString("status","Opening");
+                                    newFragment.setArguments(bundle);
+
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                             }
@@ -202,16 +312,17 @@ public class availabilityMenu extends Fragment {
                 }
 
                 else{
+                    search("Wednesday");
                     spin2.setEnabled(false);
                 }
             }
         });
-        Spinner spin3 = (Spinner) getActivity().findViewById(R.id.spinner3);
+
         Switch simpleSwitch3 = (Switch) getActivity().findViewById(R.id.thursday);
         simpleSwitch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             Spinner spin3 = (Spinner) getActivity().findViewById(R.id.spinner3);
 
-            final EditText ass = (EditText) getActivity().findViewById(R.id.ass);
+
             @SuppressLint("ResourceType")
             @Override
             public void onCheckedChanged(CompoundButton cb, boolean on){
@@ -219,20 +330,40 @@ public class availabilityMenu extends Fragment {
 
                     spin3.setEnabled(true);
                     // Get Current Time
-                    final Calendar c = Calendar.getInstance();
-                    int mHour = c.get(Calendar.HOUR_OF_DAY);
-                    int mMinute = c.get(Calendar.MINUTE);
+
+
 
                     spin3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            Object value = parent.getItemAtPosition(position);
+
                             switch (position) {
                                 case 0:
                                     DialogFragment newFragment = new timepickerfragment();
+                                    boolean a = validatelist("Thursday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    Bundle bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Thursday");
+                                    bundle.putString("status","Opening");
+                                    newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                                 case 1:
                                     newFragment = new timepickerfragment();
+
+                                    a = validatelist("Thursday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Thursday");
+                                    bundle.putString("status","Closing");
+                                    newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                             }
@@ -248,17 +379,18 @@ public class availabilityMenu extends Fragment {
                 }
 
                 else{
+                    search("Thursday");
                     spin3.setEnabled(false);
                 }
             }
         });
 
-        Spinner spin4 = (Spinner) getActivity().findViewById(R.id.spinner4);
+
         Switch simpleSwitch4 = (Switch) getActivity().findViewById(R.id.friday);
         simpleSwitch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             Spinner spin4 = (Spinner) getActivity().findViewById(R.id.spinner4);
 
-            final EditText ass = (EditText) getActivity().findViewById(R.id.ass);
+
             @SuppressLint("ResourceType")
             @Override
             public void onCheckedChanged(CompoundButton cb, boolean on){
@@ -266,9 +398,6 @@ public class availabilityMenu extends Fragment {
 
                     spin4.setEnabled(true);
                     // Get Current Time
-                    final Calendar c = Calendar.getInstance();
-                    int mHour = c.get(Calendar.HOUR_OF_DAY);
-                    int mMinute = c.get(Calendar.MINUTE);
 
                     spin4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -276,10 +405,31 @@ public class availabilityMenu extends Fragment {
                             switch (position) {
                                 case 0:
                                     DialogFragment newFragment = new timepickerfragment();
+                                    boolean a = validatelist("Friday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    Bundle bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Friday");
+                                    bundle.putString("status","Opening");
+                                    newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                                 case 1:
                                     newFragment = new timepickerfragment();
+
+                                    a = validatelist("Friday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Friday");
+                                    bundle.putString("status","Closing");
+                                    newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                             }
@@ -295,17 +445,18 @@ public class availabilityMenu extends Fragment {
                 }
 
                 else{
+                    search("Friday");
                     spin4.setEnabled(false);
                 }
             }
         });
 
-        Spinner spin5 = (Spinner) getActivity().findViewById(R.id.spinner5);
+
         Switch simpleSwitch5 = (Switch) getActivity().findViewById(R.id.saturday);
         simpleSwitch5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             Spinner spin5 = (Spinner) getActivity().findViewById(R.id.spinner5);
 
-            final EditText ass = (EditText) getActivity().findViewById(R.id.ass);
+
             @SuppressLint("ResourceType")
             @Override
             public void onCheckedChanged(CompoundButton cb, boolean on){
@@ -323,10 +474,30 @@ public class availabilityMenu extends Fragment {
                             switch (position) {
                                 case 0:
                                     DialogFragment newFragment = new timepickerfragment();
+                                    boolean a = validatelist("Saturday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    Bundle bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Saturday");
+                                    bundle.putString("status","Opening");
+                                    newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                                 case 1:
                                     newFragment = new timepickerfragment();
+                                    a = validatelist("Saturday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Saturday");
+                                    bundle.putString("status","Closing");
+                                    newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                             }
@@ -342,18 +513,18 @@ public class availabilityMenu extends Fragment {
                 }
 
                 else{
+                    search("Saturday");
                     spin5.setEnabled(false);
                 }
             }
         });
 
 
-        Spinner spin6 = (Spinner) getActivity().findViewById(R.id.spinner6);
+
         Switch simpleSwitch6 = (Switch) getActivity().findViewById(R.id.sunday);
         simpleSwitch6.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             Spinner spin6 = (Spinner) getActivity().findViewById(R.id.spinner6);
 
-            final EditText ass = (EditText) getActivity().findViewById(R.id.ass);
             @SuppressLint("ResourceType")
             @Override
             public void onCheckedChanged(CompoundButton cb, boolean on){
@@ -361,9 +532,6 @@ public class availabilityMenu extends Fragment {
 
                     spin6.setEnabled(true);
                     // Get Current Time
-                    final Calendar c = Calendar.getInstance();
-                    int mHour = c.get(Calendar.HOUR_OF_DAY);
-                    int mMinute = c.get(Calendar.MINUTE);
 
                     spin6.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -371,10 +539,30 @@ public class availabilityMenu extends Fragment {
                             switch (position) {
                                 case 0:
                                     DialogFragment newFragment = new timepickerfragment();
+                                    boolean a = validatelist("Sunday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    Bundle bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Sunday");
+                                    bundle.putString("status","Opening");
+                                    newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                                 case 1:
                                     newFragment = new timepickerfragment();
+                                    a = validatelist("Sunday");
+                                    if (a==true){
+                                        Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                    bundle = new Bundle();
+                                    bundle.putStringArrayList("availability",availability);
+                                    bundle.putString("day","Sunday");
+                                    bundle.putString("status","Closing");
+                                    newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                                     break;
                             }
@@ -390,8 +578,19 @@ public class availabilityMenu extends Fragment {
                 }
 
                 else{
+                    search("Sunday");
                     spin6.setEnabled(false);
                 }
+
+            }
+        });
+
+        Button button= getActivity().findViewById(R.id.Button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //push to database
+
             }
         });
     }

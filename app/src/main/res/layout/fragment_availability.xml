@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:ignore="MissingConstraints">
+        tools:layout_editor_absoluteY="0dp">
 
         <Switch
             android:id="@+id/monday"
@@ -30,11 +32,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tuesday" />
+
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/spinner_list"/>
+            android:entries="@array/spinner_list" />
 
 
         <Switch
@@ -42,63 +45,83 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Wednesday" />
+
         <Spinner
             android:id="@+id/spinner2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/spinner_list"/>
+            android:entries="@array/spinner_list" />
 
         <Switch
             android:id="@+id/thursday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Thursday" />
+
         <Spinner
             android:id="@+id/spinner3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/spinner_list"
-            android:prompt="@string/hint"/>
+            android:prompt="@string/hint" />
 
         <Switch
             android:id="@+id/friday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Friday" />
+
         <Spinner
             android:id="@+id/spinner4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/spinner_list"/>
+            android:entries="@array/spinner_list" />
 
         <Switch
             android:id="@+id/saturday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Saturday"
-            />
+            android:text="Saturday" />
+
         <Spinner
             android:id="@+id/spinner5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/spinner_list"/>
+            android:entries="@array/spinner_list" />
 
         <Switch
             android:id="@+id/sunday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sunday" />
+
         <Spinner
             android:id="@+id/spinner6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/spinner_list"/>
+            android:entries="@array/spinner_list" />
 
-        <EditText
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your availibility"
+            android:textSize="24sp" />
+
+        <ListView
             android:id="@+id/ass"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="302dp"></ListView>
+
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/Button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Confirm Availibility" />
+    </LinearLayout>
+
+
+</ScrollView>

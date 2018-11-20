@@ -5,18 +5,18 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TimePicker;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class timepickerfragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
-
+    ArrayList<String> availability;
+    String day;
+    String status;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current time as the default values for the picker
@@ -25,25 +25,29 @@ public class timepickerfragment extends DialogFragment
         int minute = c.get(Calendar.MINUTE);
 
         TimePickerDialog a = new TimePickerDialog(getActivity(), this, hour, minute, DateFormat.is24HourFormat(getActivity()));
-        // Create a new instance of TimePickerDialog and return it
 
-        TextView tv = new TextView(getActivity());
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT, // Width of TextView
-                RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
-        tv.setLayoutParams(lp);
-        tv.setPadding(10, 10, 10, 10);
-        tv.setGravity(Gravity.CENTER);
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
-        tv.setText("This is a custom title.");
-        a.setCustomTitle(tv);
+
         return a;
     }
 
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        EditText tv1=(EditText) getActivity().findViewById(R.id.ass);
 
-        tv1.setText("Hour: "+view.getCurrentHour()+" Minute: "+view.getCurrentMinute());
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        day=getArguments().getString("day");
+        availability=getArguments().getStringArrayList("availability");
+        status=getArguments().getString("status");
+        ListView tv1= (ListView) getActivity().findViewById(R.id.ass);
+
+
+        availability.add(day+" "+status+" Hour: "+view.getCurrentHour()+" Minute: "+view.getCurrentMinute());
+
+
+        ArrayAdapter arrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.simple_list_item_1,availability);
+
+        tv1.setAdapter(arrayAdapter2);
+        //tv1.setText("Hour: "+view.getCurrentHour()+" Minute: "+view.getCurrentMinute());
+
+
+
 
     }
 }
