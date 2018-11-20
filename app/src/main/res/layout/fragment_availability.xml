@@ -24,7 +24,7 @@
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:entries="@array/spinner_list" />
 
         <Switch
@@ -36,7 +36,7 @@
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:entries="@array/spinner_list" />
 
 
@@ -49,7 +49,7 @@
         <Spinner
             android:id="@+id/spinner2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:entries="@array/spinner_list" />
 
         <Switch
@@ -61,7 +61,7 @@
         <Spinner
             android:id="@+id/spinner3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:entries="@array/spinner_list"
             android:prompt="@string/hint" />
 
@@ -74,7 +74,7 @@
         <Spinner
             android:id="@+id/spinner4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:entries="@array/spinner_list" />
 
         <Switch
@@ -86,7 +86,7 @@
         <Spinner
             android:id="@+id/spinner5"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:entries="@array/spinner_list" />
 
         <Switch
@@ -98,7 +98,7 @@
         <Spinner
             android:id="@+id/spinner6"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:entries="@array/spinner_list" />
 
         <TextView
@@ -109,7 +109,7 @@
             android:textSize="24sp" />
 
         <ListView
-            android:id="@+id/ass"
+            android:id="@+id/availlist"
             android:layout_width="match_parent"
             android:layout_height="302dp"></ListView>
 

@@ -35,7 +35,7 @@ public class timepickerfragment extends DialogFragment
         day=getArguments().getString("day");
         availability=getArguments().getStringArrayList("availability");
         status=getArguments().getString("status");
-        ListView tv1= (ListView) getActivity().findViewById(R.id.ass);
+        ListView tv1= (ListView) getActivity().findViewById(R.id.availlist);
 
 
         availability.add(day+" "+status+" Hour: "+view.getCurrentHour()+" Minute: "+view.getCurrentMinute());

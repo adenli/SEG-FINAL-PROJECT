@@ -6,6 +6,7 @@
 
 
     <string-array name="spinner_list">
+        <item>Click here to set time</item>
         <item>Set Opening Time</item>
         <item>Set Closing Time</item>
     </string-array>

@@ -50,7 +50,7 @@ public class availabilityMenu extends Fragment {
         spin5.setEnabled(false);
         spin6.setEnabled(false);
 
-        ListView ass = getActivity().findViewById(R.id.ass);
+        ListView availList = getActivity().findViewById(R.id.availlist);
 
         return view;
         //this will initialize the layout of the activity servproaddserv
@@ -68,7 +68,7 @@ public class availabilityMenu extends Fragment {
 
     private void search(String day){
         ArrayList<String> removeList = new ArrayList<>();
-        ListView tv1= (ListView) getActivity().findViewById(R.id.ass);
+        ListView tv1= (ListView) getActivity().findViewById(R.id.availlist);
         Iterator<String> iterator = availability.iterator();
 
         Integer counter = -1;
@@ -135,7 +135,7 @@ public class availabilityMenu extends Fragment {
 
 
                             switch (position) {
-                                case 0:
+                                case 1:
                                     DialogFragment newFragment = new timepickerfragment();
                                     boolean a = validatelist("Monday");
                                     if (a==true){
@@ -148,8 +148,9 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("status","Opening");
                                     newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin.setSelection(0);
                                     break;
-                                case 1:
+                                case 2:
                                     newFragment = new timepickerfragment();
                                     a = validatelist("Monday");
                                     if (a==true){
@@ -162,6 +163,7 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("status","Closing");
                                     newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin.setSelection(0);
                                     break;
                             }
 
@@ -201,7 +203,7 @@ public class availabilityMenu extends Fragment {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                             switch (position) {
-                                case 0:
+                                case 1:
                                     DialogFragment newFragment = new timepickerfragment();
                                     boolean a = validatelist("Tuesday");
                                     if (a==true){
@@ -214,8 +216,9 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("status","Opening");
                                     newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin1.setSelection(0);
                                     break;
-                                case 1:
+                                case 2:
                                     newFragment = new timepickerfragment();
                                     a = validatelist("Tuesday");
                                     if (a==true){
@@ -228,6 +231,7 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("status","Closing");
                                     newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin1.setSelection(0);
                                     break;
                             }
 
@@ -267,7 +271,7 @@ public class availabilityMenu extends Fragment {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                             switch (position) {
-                                case 0:
+                                case 1:
                                     DialogFragment newFragment = new timepickerfragment();
                                     boolean a = validatelist("Wednesday");
                                     if (a==true){
@@ -280,8 +284,9 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("status","Opening");
                                     newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin2.setSelection(0);
                                     break;
-                                case 1:
+                                case 2:
                                     newFragment = new timepickerfragment();
                                     a = validatelist("Wednesday");
                                     if (a==true){
@@ -293,8 +298,8 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("day","Wednesday");
                                     bundle.putString("status","Opening");
                                     newFragment.setArguments(bundle);
-
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin2.setSelection(0);
                                     break;
                             }
 
@@ -334,7 +339,7 @@ public class availabilityMenu extends Fragment {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                             switch (position) {
-                                case 0:
+                                case 1:
                                     DialogFragment newFragment = new timepickerfragment();
                                     boolean a = validatelist("Thursday");
                                     if (a==true){
@@ -347,8 +352,9 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("status","Opening");
                                     newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin3.setSelection(0);
                                     break;
-                                case 1:
+                                case 2:
                                     newFragment = new timepickerfragment();
 
                                     a = validatelist("Thursday");
@@ -362,6 +368,7 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("status","Closing");
                                     newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin3.setSelection(0);
                                     break;
                             }
 
@@ -400,7 +407,7 @@ public class availabilityMenu extends Fragment {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                             switch (position) {
-                                case 0:
+                                case 1:
                                     DialogFragment newFragment = new timepickerfragment();
                                     boolean a = validatelist("Friday");
                                     if (a==true){
@@ -413,8 +420,9 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("status","Opening");
                                     newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin4.setSelection(0);
                                     break;
-                                case 1:
+                                case 2:
                                     newFragment = new timepickerfragment();
 
                                     a = validatelist("Friday");
@@ -428,6 +436,7 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("status","Closing");
                                     newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin4.setSelection(0);
                                     break;
                             }
 
@@ -467,7 +476,7 @@ public class availabilityMenu extends Fragment {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             Object value = parent.getItemAtPosition(position);
                             switch (position) {
-                                case 0:
+                                case 1:
                                     DialogFragment newFragment = new timepickerfragment();
                                     boolean a = validatelist("Saturday");
                                     if (a==true){
@@ -480,8 +489,9 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("status","Opening");
                                     newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin5.setSelection(0);
                                     break;
-                                case 1:
+                                case 2:
                                     newFragment = new timepickerfragment();
                                     a = validatelist("Saturday");
                                     if (a==true){
@@ -494,6 +504,7 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("status","Closing");
                                     newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin5.setSelection(0);
                                     break;
                             }
 
@@ -532,7 +543,7 @@ public class availabilityMenu extends Fragment {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                             switch (position) {
-                                case 0:
+                                case 1:
                                     DialogFragment newFragment = new timepickerfragment();
                                     boolean a = validatelist("Sunday");
                                     if (a==true){
@@ -545,8 +556,9 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("status","Opening");
                                     newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin6.setSelection(0);
                                     break;
-                                case 1:
+                                case 2:
                                     newFragment = new timepickerfragment();
                                     a = validatelist("Sunday");
                                     if (a==true){
@@ -559,6 +571,7 @@ public class availabilityMenu extends Fragment {
                                     bundle.putString("status","Closing");
                                     newFragment.setArguments(bundle);
                                     newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                                    spin6.setSelection(0);
                                     break;
                             }
 
