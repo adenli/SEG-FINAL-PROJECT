@@ -80,8 +80,12 @@ public class serviceMenu extends Fragment {
                     Service temp = postSnapshot.getValue(Service.class);
                     services.add(temp);
                 }
+                try {
+                    createList();
+                } catch(NullPointerException e) {
+                    e.printStackTrace();
+                }
 
-                createList();
             }
 
             @Override
@@ -107,7 +111,11 @@ public class serviceMenu extends Fragment {
                             Service temp = postSnapshot1.getValue(Service.class);
                             myServices.add(temp);
                         }
-                        createList();
+                        try {
+                            createList();
+                        } catch(NullPointerException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
@@ -115,7 +123,11 @@ public class serviceMenu extends Fragment {
 
                     }
                 });
-                createList();
+                try {
+                    createList();
+                } catch(NullPointerException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -126,7 +138,7 @@ public class serviceMenu extends Fragment {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void createList() {
+    private void createList() throws NullPointerException {
 
         ArrayList<String> allServices = new ArrayList<>();
         ArrayList<String> myDisplayServices = new ArrayList<>();
@@ -217,7 +229,12 @@ public class serviceMenu extends Fragment {
                 return super.onContextItemSelected(item);
 
         }
-        createList();
+        try {
+            createList();
+        }catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
         return true;
     }
 
