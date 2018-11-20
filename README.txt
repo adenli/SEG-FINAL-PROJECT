@@ -14,3 +14,5 @@ The admin login information is:
 
 username: admin 
 password: admin
+
+GitHub: https://github.com/adenli/SEG-FINAL-PROJECT/tree/master

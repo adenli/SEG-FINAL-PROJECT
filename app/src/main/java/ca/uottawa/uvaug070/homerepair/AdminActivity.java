@@ -78,7 +78,7 @@ public class AdminActivity extends AppCompatActivity {
                 }
                 if (!adminExists) {
                     String id = databaseAccounts.push().getKey();
-                    Admin account = new Admin("admin", "admin", Role.ADMIN);
+                    Admin account = new Admin("admin", "admin", Role.ADMIN, id);
                     databaseAccounts.child(id).setValue(account);
                 }
                 listCreate();

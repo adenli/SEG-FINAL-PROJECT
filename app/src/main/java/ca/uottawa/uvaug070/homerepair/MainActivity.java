@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(!adminExists) {
                     String id = databaseAccounts.push().getKey();
-                    Admin account = new Admin("admin", "admin", Role.ADMIN);
+                    Admin account = new Admin("admin", "admin", Role.ADMIN, id);
                     databaseAccounts.child(id).setValue(account);
                 }
             }
@@ -119,8 +119,9 @@ public class MainActivity extends AppCompatActivity {
         if (AccountCreated!=true){
             if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
                 String id = databaseAccounts.push().getKey();
-                ServiceProvider account = new ServiceProvider(username, password, Role.SERVICEPROVIDER);
+                ServiceProvider account = new ServiceProvider(username, password, Role.SERVICEPROVIDER, id);
                 databaseAccounts.child(id).setValue(account);
+                databaseAccounts.child(id).child("services").setValue(null);
                 ((EditText)findViewById(R.id.editTextName)).setText("");
                 ((EditText)findViewById(R.id.editTextPassword)).setText("");
                 Toast.makeText(this, "Account created", Toast.LENGTH_LONG).show();
@@ -151,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         if (AccountCreated!=true){
             if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
                 String id = databaseAccounts.push().getKey();
-                User account = new User(username, password, Role.USER);
+                User account = new User(username, password, Role.USER, id);
                 databaseAccounts.child(id).setValue(account);
                 ((EditText)findViewById(R.id.editTextName)).setText("");
                 ((EditText)findViewById(R.id.editTextPassword)).setText("");

@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -30,24 +31,29 @@ import java.util.List;
 public class serviceMenu extends Fragment {
 
     DatabaseReference databaseServices;
-    DatabaseReference databaseServPro;
+    DatabaseReference databaseProviders;
+    DatabaseReference databaseMyServices;
+    ServiceProvider provider;
     ListView servaddview;
     List<Service> services;
-
+    List<Service> myServices;
+    private String username;
     ListView myservaddview;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //returning our layout file
         //change R.layout.yourlayoutfilename for each of your fragments
 
-        View view=inflater.inflate(R.layout.activity_servproaddserv, container, false);
+        View view = inflater.inflate(R.layout.activity_servproaddserv, container, false);
         super.onCreate(savedInstanceState);
         servaddview = (ListView) view.findViewById(R.id.servaddview);
         myservaddview = (ListView) view.findViewById(R.id.myservaddview);
         services = new ArrayList<>();
-
+        myServices = new ArrayList<>();
         databaseServices = FirebaseDatabase.getInstance().getReference("services");
+        databaseProviders = FirebaseDatabase.getInstance().getReference("accounts");
 
         setHasOptionsMenu(true);
         return view;
@@ -83,24 +89,62 @@ public class serviceMenu extends Fragment {
 
             }
         });
+        databaseProviders.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    ServiceProvider temp = postSnapshot.getValue(ServiceProvider.class);
+                    if (temp.getUsername().equals(username)) {
+                        provider = temp;
+                    }
+                }
+                databaseMyServices = FirebaseDatabase.getInstance().getReference("accounts").child(provider.getUid()).child("services");
+                databaseMyServices.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot1) {
+                        myServices.clear();
+                        for (DataSnapshot postSnapshot1 : dataSnapshot1.getChildren()) {
+                            Service temp = postSnapshot1.getValue(Service.class);
+                            myServices.add(temp);
+                        }
+                        createList();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                createList();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void createList() {
 
-        ArrayList<String> service = new ArrayList<>();
-        service.clear();
+        ArrayList<String> allServices = new ArrayList<>();
+        ArrayList<String> myDisplayServices = new ArrayList<>();
         DecimalFormat df2 = new DecimalFormat(".##");
         for (Service temp1 : services) {
-            service.add(temp1.getName() + "\n" + "$" + df2.format(temp1.getRate()) + "/hour");
+            allServices.add(temp1.getName() + "\n" + "$" + df2.format(temp1.getRate()) + "/hour");
+        }
+        for (Service temp1 : myServices) {
+            myDisplayServices.add(temp1.getName() + "\n" + "$" + df2.format(temp1.getRate()) + "/hour");
         }
 
-        ArrayAdapter arrayAdapter2 = new ArrayAdapter(getActivity().getApplicationContext(), R.layout.simple_list_item_1, service);
-        servaddview.setAdapter(arrayAdapter2);
+        ArrayAdapter servicesAdapter = new ArrayAdapter(getActivity().getApplicationContext(), R.layout.simple_list_item_1, allServices);
+        ArrayAdapter myServicesAdapter = new ArrayAdapter(getActivity().getApplicationContext(), R.layout.simple_list_item_1, myDisplayServices);
+        servaddview.setAdapter(servicesAdapter);
 
         //change when db updates
 
-        myservaddview.setAdapter(arrayAdapter2);
+        myservaddview.setAdapter(myServicesAdapter);
 
         registerForContextMenu(servaddview);
         registerForContextMenu(myservaddview);
@@ -156,17 +200,18 @@ public class serviceMenu extends Fragment {
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item){
-        AdapterView.AdapterContextMenuInfo info= (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch(item.getItemId()){
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
 
             case R.id.add:
-                Toast.makeText(getActivity().getApplicationContext(), "yo fam that shit got added ayo", Toast.LENGTH_SHORT).show();
-
+                databaseProviders.child(provider.getUid()).child("services").child(services.get(info.position).getUid()).setValue(services.get(info.position));
+                Toast.makeText(getActivity().getApplicationContext(), "Added service", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.remove:
                 Toast.makeText(getActivity().getApplicationContext(), "deleted", Toast.LENGTH_SHORT).show();
+                databaseProviders.child(provider.getUid()).child("services").child(myServices.get(info.position).getUid()).setValue(null);
                 break;
             default:
                 return super.onContextItemSelected(item);
@@ -176,6 +221,7 @@ public class serviceMenu extends Fragment {
         return true;
     }
 
-
-
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
