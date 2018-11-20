@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static android.content.ContentValues.TAG;
 
@@ -58,15 +59,28 @@ public class myaccountMenu extends Fragment {
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,Spinnerlist);
         spin.setAdapter(arrayAdapter);
 
-        Button confirmButton = (Button) view.findViewById(R.id.confirm);
 
 
-        confirmButton.setOnClickListener(new View.OnClickListener() {
+        Button confirm = (Button) view.findViewById(R.id.confirm);
+
+        confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                confirm();
+                boolean addressHasNum = Pattern.compile( "[0-9]" ).matcher(address.getText().toString()).find();
+                boolean addressHasAlp = Pattern.compile( "[a-zA-z]" ).matcher(address.getText().toString()).find();
 
+                if (name.getText().toString().equals("") || address.getText().toString().equals("") ||
+                        phone.getText().toString().equals("")) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Form not complete", Toast.LENGTH_SHORT).show();
+                } else if ((!(Pattern.matches("[0-9]+", phone.getText().toString()))) || phone.getText().toString().length() < 10) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Phone number invalid", Toast.LENGTH_SHORT).show();
+                } else if (!(addressHasNum && addressHasAlp)) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Address invalid", Toast.LENGTH_SHORT).show();
+                } else {
+                    //update or add to database
+                    confirm();
+                }
             }
         });
 
