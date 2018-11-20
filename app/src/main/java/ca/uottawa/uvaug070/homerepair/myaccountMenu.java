@@ -34,7 +34,21 @@ public class myaccountMenu extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view=inflater.inflate(R.layout.fragment_serviceproviderinfo, container, false);
-        databaseServPro = FirebaseDatabase.getInstance().getReference("accounts");
+
+        EditText name = (EditText) view.findViewById(R.id.name);
+        name.setText("insert serviceprovider company name here");
+        EditText address = (EditText) view.findViewById(R.id.address);
+        address.setText("insert serviceprovider address here");
+        EditText description = (EditText) view.findViewById(R.id.description);
+        description.setText("insert serviceprovider description here");
+        EditText phone = (EditText) view.findViewById(R.id.phone);
+        phone.setText("insert serviceprovider phone number here");
+        Spinner spin = (Spinner) view.findViewById(R.id.select);
+        String[] Spinnerlist={"YES","NO"};
+        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,Spinnerlist);
+        spin.setAdapter(arrayAdapter);
+
+        /*databaseServPro = FirebaseDatabase.getInstance().getReference("accounts");
         String nameText="";
         String addressText="";
         String phoneText="";
@@ -71,7 +85,7 @@ public class myaccountMenu extends Fragment {
             String[] Spinnerlist={"YES","NO"};
             ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,Spinnerlist);
             spin.setAdapter(arrayAdapter);
-        }
+        }*/
 
         //databaseServPro.child(uid);
         //returning our layout file
@@ -117,8 +131,8 @@ public class myaccountMenu extends Fragment {
         else {
             myProfile= new Profile(name.toString(),address.toString(),phone.toString(),description.toString(),false);
         }
-        databaseServPro = FirebaseDatabase.getInstance().getReference("accounts");
-        databaseServPro.child(uid).child("profile").setValue(myProfile);
+        /*databaseServPro = FirebaseDatabase.getInstance().getReference("accounts");
+        databaseServPro.child(uid).child("profile").setValue(myProfile);*/
         return;
 
     }
