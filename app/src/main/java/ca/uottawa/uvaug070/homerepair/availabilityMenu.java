@@ -55,6 +55,7 @@ public class availabilityMenu extends Fragment {
 
 
                                                       }
+
                                                   }
 
                                                   @Override
@@ -83,6 +84,8 @@ public class availabilityMenu extends Fragment {
         spin6.setEnabled(false);
 
         ListView availList = getActivity().findViewById(R.id.availlist);
+
+
 
         return view;
         //this will initialize the layout of the activity servproaddserv
@@ -141,6 +144,12 @@ public class availabilityMenu extends Fragment {
         if ((a.length()!=0)&&(b.length()!=0)){
             exists=true;
         }
+        if ((a.length()==0)&&((b.length()!=0))){
+            exists=false;
+        }
+        if ((b.length()==0)&&((a.length()!=0))){
+            exists=false;
+        }
 
         return exists;
 
@@ -175,7 +184,7 @@ public class availabilityMenu extends Fragment {
                                 case 1:
                                     DialogFragment newFragment = new timepickerfragment();
                                     boolean a = validatelist("Monday");
-                                    if (a == true) {
+                                    if ((a == true)) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
                                     }
