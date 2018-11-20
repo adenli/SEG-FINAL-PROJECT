@@ -18,7 +18,6 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Iterator;
 
 public class availabilityMenu extends Fragment {
@@ -262,13 +261,11 @@ public class availabilityMenu extends Fragment {
 
                     spin2.setEnabled(true);
                     // Get Current Time
-                    final Calendar c = Calendar.getInstance();
-                    int mHour = c.get(Calendar.HOUR_OF_DAY);
-                    int mMinute = c.get(Calendar.MINUTE);
+
 
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            Object value = parent.getItemAtPosition(position);
+
                             switch (position) {
                                 case 0:
                                     DialogFragment newFragment = new timepickerfragment();
@@ -401,7 +398,7 @@ public class availabilityMenu extends Fragment {
 
                     spin4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            Object value = parent.getItemAtPosition(position);
+
                             switch (position) {
                                 case 0:
                                     DialogFragment newFragment = new timepickerfragment();
@@ -464,9 +461,7 @@ public class availabilityMenu extends Fragment {
 
                     spin5.setEnabled(true);
                     // Get Current Time
-                    final Calendar c = Calendar.getInstance();
-                    int mHour = c.get(Calendar.HOUR_OF_DAY);
-                    int mMinute = c.get(Calendar.MINUTE);
+
 
                     spin5.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -535,7 +530,7 @@ public class availabilityMenu extends Fragment {
 
                     spin6.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            Object value = parent.getItemAtPosition(position);
+
                             switch (position) {
                                 case 0:
                                     DialogFragment newFragment = new timepickerfragment();
