@@ -36,8 +36,8 @@ public class ServiceNavigation extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle extras = getIntent().getExtras();
-        username = extras.getString("username");
-        uid = extras.getString("uid");
+        this.username = extras.getString("username");
+        this.uid = extras.getString("uid");
 
 
         welcomeMenu a= new welcomeMenu();
@@ -103,6 +103,7 @@ public class ServiceNavigation extends AppCompatActivity {
                 try{
                     Bundle savedInstanceState=new Bundle();
                     savedInstanceState.putString("uid",this.uid);
+
                     myaccountMenu fragment = myaccountMenu.class.newInstance();
                     fragment.setArguments(savedInstanceState);
                     // Insert the fragment by replacing any existing fragment
