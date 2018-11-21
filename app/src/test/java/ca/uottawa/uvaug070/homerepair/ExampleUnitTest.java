@@ -43,20 +43,26 @@ public class ExampleUnitTest {
     }
     @Test
     public void checkProfileAddress(){
-        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555");
+        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
         ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
         assertEquals("Check that the proper profile address is output","19 Brian Crescent", testServiceProvider.getServiceProviderProfile().getAddress());
     }
     @Test
     public void checkProfilePhoneNum(){
-        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555");
+        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
         ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
         assertEquals("Check that the proper profile phone number is output","6125555555", testServiceProvider.getServiceProviderProfile().getPhoneNumber());
     }
     @Test
     public void checkProfileCompanyName() {
-        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555");
+        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
         ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
-        assertEquals("Check that the proper profile com is output", "SegProject", testServiceProvider.getServiceProviderProfile().getCompanyName());
+        assertEquals("Check that the proper profile company is output", "SegProject", testServiceProvider.getServiceProviderProfile().getCompanyName());
+    }
+    @Test
+    public void checkProfileDescription() {
+        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
+        ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
+        assertEquals("Check that the proper profile description is output", "this is the description for the profile", testServiceProvider.getServiceProviderProfile().getCompanyName());
     }
 }
