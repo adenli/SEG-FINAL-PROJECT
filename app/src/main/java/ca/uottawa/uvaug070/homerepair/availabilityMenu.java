@@ -24,7 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 public class availabilityMenu extends Fragment {
     ArrayList<String> availability = new ArrayList<String>();
@@ -126,29 +128,53 @@ public class availabilityMenu extends Fragment {
         tv1.setAdapter(arrayAdapter2);
     }
 
-    private boolean validatelist(String day){
+    private boolean validatelist(String day, boolean c){
         String a = "";
         String b = "";
+        List<String> item = null;
+        List<String> item1=null;
+
         boolean exists=false;
         Iterator<String> iterator = availability.iterator();
         while (iterator.hasNext()){
             String temp=iterator.next();
             if (temp.contains(day)&&temp.contains("Closing")){
                 a=temp;
+                String a1 = temp.replaceAll(day, "").replaceAll(" Closing Hour: ","").replaceAll("Minute: ","");
+                //a1= something like 18 09
+                item = Arrays.asList(a1.split(" "));
+
+
             }
             if (temp.contains(day)&&temp.contains("Opening")){
                 b=temp;
+                String b1 = temp.replaceAll(day, "").replaceAll(" Opening Hour: ","").replaceAll("Minute: ","");
+                item1 = Arrays.asList(b1.split(" "));
             }
         }
 
+
         if ((a.length()!=0)&&(b.length()!=0)){
+
             exists=true;
         }
-        if ((a.length()==0)&&((b.length()!=0))){
-            exists=false;
+        else if ((a.length()==0)&&((b.length()!=0))){
+
+            if (c==true){
+                exists=true;
+            }
+            else{
+                exists=false;
+            }
         }
-        if ((b.length()==0)&&((a.length()!=0))){
-            exists=false;
+        else if ((b.length()==0)&&((a.length()!=0))){
+
+            if (c==false){
+                exists=true;
+            }
+            else{
+                exists=false;
+            }
         }
 
         return exists;
@@ -183,7 +209,7 @@ public class availabilityMenu extends Fragment {
                             switch (position) {
                                 case 1:
                                     DialogFragment newFragment = new timepickerfragment();
-                                    boolean a = validatelist("Monday");
+                                    boolean a = validatelist("Monday",true);
                                     if ((a == true)) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -198,7 +224,7 @@ public class availabilityMenu extends Fragment {
                                     break;
                                 case 2:
                                     newFragment = new timepickerfragment();
-                                    a = validatelist("Monday");
+                                    a = validatelist("Monday",false);
                                     if (a == true) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -249,7 +275,7 @@ public class availabilityMenu extends Fragment {
                             switch (position) {
                                 case 1:
                                     DialogFragment newFragment = new timepickerfragment();
-                                    boolean a = validatelist("Tuesday");
+                                    boolean a = validatelist("Tuesday",true);
                                     if (a == true) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -264,7 +290,7 @@ public class availabilityMenu extends Fragment {
                                     break;
                                 case 2:
                                     newFragment = new timepickerfragment();
-                                    a = validatelist("Tuesday");
+                                    a = validatelist("Tuesday",false);
                                     if (a == true) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -315,7 +341,7 @@ public class availabilityMenu extends Fragment {
                             switch (position) {
                                 case 1:
                                     DialogFragment newFragment = new timepickerfragment();
-                                    boolean a = validatelist("Wednesday");
+                                    boolean a = validatelist("Wednesday",true);
                                     if (a == true) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -330,7 +356,7 @@ public class availabilityMenu extends Fragment {
                                     break;
                                 case 2:
                                     newFragment = new timepickerfragment();
-                                    a = validatelist("Wednesday");
+                                    a = validatelist("Wednesday",false);
                                     if (a == true) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -380,7 +406,7 @@ public class availabilityMenu extends Fragment {
                             switch (position) {
                                 case 1:
                                     DialogFragment newFragment = new timepickerfragment();
-                                    boolean a = validatelist("Thursday");
+                                    boolean a = validatelist("Thursday",true);
                                     if (a == true) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -396,7 +422,7 @@ public class availabilityMenu extends Fragment {
                                 case 2:
                                     newFragment = new timepickerfragment();
 
-                                    a = validatelist("Thursday");
+                                    a = validatelist("Thursday",false);
                                     if (a == true) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -446,7 +472,7 @@ public class availabilityMenu extends Fragment {
                             switch (position) {
                                 case 1:
                                     DialogFragment newFragment = new timepickerfragment();
-                                    boolean a = validatelist("Friday");
+                                    boolean a = validatelist("Friday",true);
                                     if (a == true) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -462,7 +488,7 @@ public class availabilityMenu extends Fragment {
                                 case 2:
                                     newFragment = new timepickerfragment();
 
-                                    a = validatelist("Friday");
+                                    a = validatelist("Friday",false);
                                     if (a == true) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -513,7 +539,7 @@ public class availabilityMenu extends Fragment {
                             switch (position) {
                                 case 1:
                                     DialogFragment newFragment = new timepickerfragment();
-                                    boolean a = validatelist("Saturday");
+                                    boolean a = validatelist("Saturday",true);
                                     if (a == true) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -528,7 +554,7 @@ public class availabilityMenu extends Fragment {
                                     break;
                                 case 2:
                                     newFragment = new timepickerfragment();
-                                    a = validatelist("Saturday");
+                                    a = validatelist("Saturday",false);
                                     if (a == true) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -577,7 +603,7 @@ public class availabilityMenu extends Fragment {
                             switch (position) {
                                 case 1:
                                     DialogFragment newFragment = new timepickerfragment();
-                                    boolean a = validatelist("Sunday");
+                                    boolean a = validatelist("Sunday",true);
                                     if (a == true) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -592,7 +618,7 @@ public class availabilityMenu extends Fragment {
                                     break;
                                 case 2:
                                     newFragment = new timepickerfragment();
-                                    a = validatelist("Sunday");
+                                    a = validatelist("Sunday",false);
                                     if (a == true) {
                                         Toast.makeText(getActivity().getApplicationContext(), "A time was already set, to edit the times, double click the switch", Toast.LENGTH_LONG).show();
                                         break;
@@ -628,6 +654,7 @@ public class availabilityMenu extends Fragment {
             @Override
             public void onClick(View v) {
                 //push to database
+
                 Iterator<String> iterator = availability.iterator();
 
                 Bundle b = getArguments();
@@ -639,12 +666,13 @@ public class availabilityMenu extends Fragment {
                     availibilityUID.child(a).child(uid).setValue(temp);
                     //availibilityDatabase.child(id).setValue(temp);
                 }
-
+                Toast.makeText(getActivity().getApplicationContext(), "Confirmed!", Toast.LENGTH_LONG).show();
                 ListView tv1= (ListView) getActivity().findViewById(R.id.availlist);
 
                 ArrayAdapter arrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.simple_list_item_1,availability);
 
                 tv1.setAdapter(arrayAdapter2);
+
 
             }
         });

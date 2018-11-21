@@ -8,9 +8,13 @@ import android.text.format.DateFormat;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
 
 public class timepickerfragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
@@ -36,18 +40,66 @@ public class timepickerfragment extends DialogFragment
         availability=getArguments().getStringArrayList("availability");
         status=getArguments().getString("status");
         ListView tv1= (ListView) getActivity().findViewById(R.id.availlist);
+        boolean status1;
+
+        List<String> a = validatelist(day, status);
 
 
-        availability.add(day+" "+status+" Hour: "+view.getCurrentHour()+" Minute: "+view.getCurrentMinute());
+        if (a==null){
+            availability.add(day + " " + status + " Hour: " + view.getCurrentHour() + " Minute: " + view.getCurrentMinute());
+            ArrayAdapter arrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.simple_list_item_1, availability);
+            tv1.setAdapter(arrayAdapter2);
+            //tv1.setText("Hour: "+view.getCurrentHour()+" Minute: "+view.getCurrentMinute());
+        }
+        else if ((Integer.parseInt(a.get(0))> hourOfDay)&&(status=="Closing")) {
+            Toast.makeText(getActivity().getApplicationContext(), "Please select a valid Time", Toast.LENGTH_LONG).show();
+
+        }
+        else if ((Integer.parseInt(a.get(0))< hourOfDay)&&(status=="Opening")) {
+            Toast.makeText(getActivity().getApplicationContext(), "Please select a valid Time", Toast.LENGTH_LONG).show();
+
+        }
+        else if (((Integer.parseInt(a.get(0)))==hourOfDay)&&(Integer.parseInt(a.get(1))>minute)&&(status=="Closing")){
+            Toast.makeText(getActivity().getApplicationContext(), "Please select a valid Time", Toast.LENGTH_LONG).show();
+        }
+        else if (((Integer.parseInt(a.get(0)))==hourOfDay)&&(Integer.parseInt(a.get(1))<minute)&&(status=="Opening")){
+            Toast.makeText(getActivity().getApplicationContext(), "Please select a valid Time", Toast.LENGTH_LONG).show();
+        }
+        else{
+            availability.add(day + " " + status + " Hour: " + view.getCurrentHour() + " Minute: " + view.getCurrentMinute());
+            ArrayAdapter arrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.simple_list_item_1, availability);
+            tv1.setAdapter(arrayAdapter2);
+        }
 
 
-        ArrayAdapter arrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.simple_list_item_1,availability);
-
-        tv1.setAdapter(arrayAdapter2);
-        //tv1.setText("Hour: "+view.getCurrentHour()+" Minute: "+view.getCurrentMinute());
+    }
 
 
+    private List<String> validatelist(String day, String status){
+        String a = "";
+        String b = "";
+        List<String> item = null;        List<String> item1=null;
+        Iterator<String> iterator = availability.iterator();
+        while (iterator.hasNext()){
+            String temp=iterator.next();
 
+            if (temp.contains(day)&&status=="Opening"){
+
+                String a1 = temp.replaceAll(day, "").replaceAll(" Closing Hour: ","").replaceAll("Minute: ","");
+                //a1= something like 18 09
+
+                item1 = Arrays.asList(a1.split(" "));
+            }
+            if (temp.contains(day)&&status=="Closing"){
+                String b1 = temp.replaceAll(day, "").replaceAll(" Opening Hour: ","").replaceAll("Minute: ","");
+
+                item1=Arrays.asList(b1.split(" "));
+
+            }
+
+        }
+
+        return item1;
 
     }
 }
