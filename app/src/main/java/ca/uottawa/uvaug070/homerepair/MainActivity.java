@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (temp instanceof ServiceProvider){
                     intent = new Intent(getApplicationContext(),ServiceNavigation.class);
-                    intent.putExtra("uid",temp.uid);
+                    intent.putExtra("uid",temp.getUid());
                 }
 
                 intent.putExtra("username",temp.getUsername());

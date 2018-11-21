@@ -80,6 +80,7 @@ public class myaccountMenu extends Fragment {
                 } else {
                     //update or add to database
                     confirm();
+                    Toast.makeText(getActivity().getApplicationContext(), "Data saved", Toast.LENGTH_SHORT).show();
                 }
             }
         });
