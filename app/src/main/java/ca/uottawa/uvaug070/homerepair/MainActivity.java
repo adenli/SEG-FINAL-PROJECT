@@ -153,7 +153,18 @@ public class MainActivity extends AppCompatActivity {
         if (AccountCreated!=true){
             if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
                 String id = databaseAccounts.push().getKey();
-                User account = new User(username, password, Role.USER, id);
+                char[] pass_sequence= password.toCharArray();
+                for(int i=0;i<pass_sequence.length;i++) {
+                    int temp=0;
+                    temp=((((int)pass_sequence[i])+12)%126);
+                    if(temp<33){
+                        temp=temp+33;
+                    }
+                    pass_sequence[i]=(char)temp;
+                }
+                String newPass=new String(pass_sequence);
+                User account = new User(username,newPass, Role.USER, id);
+
                 databaseAccounts.child(id).setValue(account);
                 ((EditText)findViewById(R.id.editTextName)).setText("");
                 ((EditText)findViewById(R.id.editTextPassword)).setText("");
@@ -179,7 +190,19 @@ public class MainActivity extends AppCompatActivity {
             Account temp= iterator.next();
             //Toast.makeText(getApplicationContext(), temp.getUsername(), Toast.LENGTH_SHORT).show();
 
-            if (((username.getText().toString().equals(temp.getUsername())))&& (password.getText().toString().equals(temp.getPassword()))) {
+            char[] charPass=temp.getPassword().toCharArray();
+            for(int i=0;i<charPass.length;i++){
+                int tempInt=0;
+                tempInt=((int)charPass[i])-12;
+                if(tempInt<33){
+                    tempInt=126-(33-tempInt);
+                }
+                charPass[i]=(char)tempInt;
+            }
+            String tempPassword= new String(charPass);
+            Toast.makeText(getApplicationContext(), tempPassword, Toast.LENGTH_SHORT).show();
+
+            if (((username.getText().toString().equals(temp.getUsername())))&& (password.getText().toString().equals(tempPassword))) {
                 Intent intent = null;
                 Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
 
