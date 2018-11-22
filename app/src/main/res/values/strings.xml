@@ -2,4 +2,15 @@
     <string name="app_name">HomeRepair</string>
     <string name="Open">HomeRepair</string>
     <string name="Close">HomeRepair</string>
+    <string name="hint" />
+
+
+    <string-array name="spinner_list">
+        <item>Click here to set time</item>
+        <item>Set Opening Time</item>
+        <item>Set Closing Time</item>
+    </string-array>
+
+
+
 </resources>
