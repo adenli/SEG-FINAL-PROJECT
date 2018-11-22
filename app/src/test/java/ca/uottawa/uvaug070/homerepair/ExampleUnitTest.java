@@ -63,6 +63,6 @@ public class ExampleUnitTest {
     public void checkProfileDescription() {
         Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
         ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
-        assertEquals("Check that the proper profile description is output", "this is the description for the profile", testServiceProvider.getServiceProviderProfile().getCompanyName());
+        assertEquals("Check that the proper profile description is output", "this is the description for the profile", testServiceProvider.getServiceProviderProfile().getDescription());
     }
 }
