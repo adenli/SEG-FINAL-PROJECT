@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
                 charPass[i]=(char)tempInt;
             }
             String tempPassword= new String(charPass);
-            Toast.makeText(getApplicationContext(), tempPassword, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getApplicationContext(), tempPassword, Toast.LENGTH_SHORT).show();
 
             if (((username.getText().toString().equals(temp.getUsername())))&& (password.getText().toString().equals(tempPassword))) {
                 Intent intent = null;
