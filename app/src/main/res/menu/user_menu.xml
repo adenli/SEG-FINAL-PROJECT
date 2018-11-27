@@ -3,6 +3,8 @@
 
     <item android:id="@+id/search"
         android:title="Search Service Provider"/>
+    <item android:id="@+id/booking"
+        android:title="Booking"/>
     <item android:id="@+id/logout"
         android:title="Log Out"/>
 

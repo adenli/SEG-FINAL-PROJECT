@@ -1,16 +1,19 @@
 package ca.uottawa.uvaug070.homerepair;
 
-import android.app.ListActivity;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,10 +27,10 @@ import java.util.Iterator;
 import static android.widget.SearchView.OnQueryTextListener;
 
 public class userMenu extends Fragment {
-    ListActivity listActivity;
+
     ArrayAdapter arrayAdapter2;
     ArrayList<String> accounts = new ArrayList<String>();
-
+    ArrayList<Object> a = new ArrayList<Object>();
     DatabaseReference databaseServPro = FirebaseDatabase.getInstance().getReference("accounts");
     ListView servaddview;
 
@@ -46,13 +49,22 @@ public class userMenu extends Fragment {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Account temp = postSnapshot.getValue(Account.class);
 
+
                     if (temp.getRole() == Role.SERVICEPROVIDER) {
                         ServiceProvider account = postSnapshot.getValue(ServiceProvider.class);
-                        accounts.add(account.getUsername());
+                        DataSnapshot account1 = postSnapshot.child("Profile").child("companyName");
+                        DataSnapshot account2 = postSnapshot.child("services");
+                        if ((account1.getValue()==null)|| account2.getValue()==null){
+                            accounts.add(account.getUsername());
+                        }
+
+                        else{
+                            for (DataSnapshot child : account2.getChildren()) {
+                                a.add( child.child("name").getValue());
+                            }
+                        accounts.add(account.getUsername()+"\nCompany: "+(account1.getValue().toString())+"\nServices: "+a.toString() );
                     }
-                }
-
-
+                }}
             }
         });
 
@@ -94,14 +106,35 @@ public class userMenu extends Fragment {
                 }
                 servaddview.setAdapter(null);
                 ArrayAdapter arrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.simple_list_item_1, tempaccount);
-
                 servaddview.setAdapter(arrayAdapter2);
-
-
-
                 return true;
             }
         });
+
+        servaddview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @SuppressLint("ResourceType")
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                final String item = (String) parent.getItemAtPosition(position);
+
+                Toast.makeText(getActivity().getApplicationContext(), item, Toast.LENGTH_SHORT).show();
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                Object fragment = null;
+                try {
+                    fragment = welcomeMenu.class.newInstance();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (java.lang.InstantiationException e) {
+                    e.printStackTrace();
+                }
+                fragmentManager.beginTransaction()
+                        .replace(R.id.layout, (Fragment) fragment)
+                        .commit();
+
+            }
+        });
+
 
     }
 
