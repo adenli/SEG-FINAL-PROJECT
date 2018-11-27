@@ -35,14 +35,11 @@ public class welcomeMenu extends Fragment {
         View view=inflater.inflate(R.layout.activity_welcome_menu, container, false);
         super.onCreate(savedInstanceState);
         String a = getCurrentTime(view);
-        a="eatdick";
         tv=(TextView) view.findViewById(R.id.role_message); //add set text
-
         return view;
         //this will initialize the layout of the activity servproaddserv
         // you must add the functionality of the servproaddserv here ex: pulling list from firebase etc
     }
-
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
