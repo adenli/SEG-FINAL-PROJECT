@@ -97,7 +97,7 @@ public class userMenu extends Fragment {
 
                 servaddview.setAdapter(arrayAdapter2);
 
-                
+
 
                 return true;
             }
