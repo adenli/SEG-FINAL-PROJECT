@@ -34,9 +34,12 @@ public class userMenu extends Fragment {
     DatabaseReference databaseServPro = FirebaseDatabase.getInstance().getReference("accounts");
     ListView servaddview;
 
+
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.search_fragment, container, false);
         super.onCreate(savedInstanceState);
+
         servaddview = (ListView) view.findViewById(R.id.list_view);
         databaseServPro.addValueEventListener(new ValueEventListener() {
 
@@ -128,8 +131,10 @@ public class userMenu extends Fragment {
                 } catch (java.lang.InstantiationException e) {
                     e.printStackTrace();
                 }
+
+                ((WelcomeActivity) getActivity()).openDrawer();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.layout, (Fragment) fragment)
+                        .replace(R.id.drawer, (Fragment) fragment)
                         .commit();
 
             }

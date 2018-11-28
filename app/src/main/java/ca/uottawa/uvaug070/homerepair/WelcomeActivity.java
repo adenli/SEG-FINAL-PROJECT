@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -109,6 +110,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void openDrawer() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_main);
+        drawer.openDrawer(Gravity.START);
+    }
+
 }
 
 
