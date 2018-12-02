@@ -60,7 +60,7 @@ public class userMenu extends Fragment {
                         ServiceProvider account = postSnapshot.getValue(ServiceProvider.class);
                         DataSnapshot account1 = postSnapshot.child("Profile").child("companyName");
                         DataSnapshot services = postSnapshot.child("services");
-
+                        accounts.add(account);
 
                         if (services.getValue()==null){
                             accountsDescriptions.add(account.getUsername());
@@ -69,10 +69,8 @@ public class userMenu extends Fragment {
                         else{
                             for (DataSnapshot child : services.getChildren()) {
                                 Service toAdd = child.getValue(Service.class);
-                                accounts.add(account);
                                 try {
                                     accountsDescriptions.add(account.getUsername()+"\nCompany: "+(account1.getValue().toString())+"\nServices: "+ toAdd.toString());
-
                                 } catch (NullPointerException e) {
                                     e.printStackTrace();
                                 }
@@ -148,8 +146,7 @@ public class userMenu extends Fragment {
 
 
                 Bundle bundle = new Bundle();
-                bundle.putString("user",item);
-                Toast.makeText(getActivity().getApplicationContext(), item, Toast.LENGTH_SHORT).show();
+                bundle.putString("user",accounts.get(position).getUid());
                 DialogFragment newFragment = new bookingDialog();
                 newFragment.setArguments(bundle);
                 newFragment.show(getActivity().getSupportFragmentManager(), "bookingDialog");

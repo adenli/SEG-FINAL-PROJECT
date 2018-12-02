@@ -23,7 +23,7 @@ public class bookingDialog extends DialogFragment {
     ArrayList<String> availability;
     String day;
     String status;
-    ArrayList<String> a = new ArrayList<>();
+    ArrayList<String> services = new ArrayList<>();
     DataSnapshot postSnapshot;
 
     @Nullable
@@ -50,19 +50,19 @@ public class bookingDialog extends DialogFragment {
     public void onStart(){
         super.onStart();
 
-        Bundle extras = getActivity().getIntent().getExtras();
+        Bundle extras = getArguments();
         final String extra = extras.getString("user");
-        final DatabaseReference database = FirebaseDatabase.getInstance().getReference("accounts");
+        final DatabaseReference database = FirebaseDatabase.getInstance().getReference("accounts").child(extra).child("services");
 
 
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                DataSnapshot account2 = postSnapshot.child("services");
-
-                for (DataSnapshot child : account2.getChildren()) {
-                    a.add(child.toString());
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Service temp = snapshot.getValue(Service.class);
+                    services.add(temp.toString());
                 }
+
             }
 
             @Override
@@ -73,7 +73,7 @@ public class bookingDialog extends DialogFragment {
 
 
         ListView listView = getView().findViewById(R.id.lv);
-        ArrayAdapter servicesAdapter = new ArrayAdapter(getActivity().getApplicationContext(), R.layout.simple_list_item_1, a);
+        ArrayAdapter servicesAdapter = new ArrayAdapter(getActivity().getApplicationContext(), R.layout.simple_list_item_1, services);
         listView.setAdapter(servicesAdapter);
 
 
