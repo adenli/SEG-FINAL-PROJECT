@@ -30,7 +30,6 @@ public class timepickerfragment extends DialogFragment
 
         TimePickerDialog a = new TimePickerDialog(getActivity(), this, hour, minute, DateFormat.is24HourFormat(getActivity()));
 
-
         return a;
     }
 

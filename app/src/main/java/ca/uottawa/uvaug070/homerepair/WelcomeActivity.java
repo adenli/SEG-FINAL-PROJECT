@@ -116,6 +116,7 @@ public class WelcomeActivity extends AppCompatActivity {
         drawer.openDrawer(Gravity.START);
     }
 
+
 }
 
 

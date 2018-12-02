@@ -3,6 +3,7 @@ package ca.uottawa.uvaug070.homerepair;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -57,6 +58,8 @@ public class userMenu extends Fragment {
                         ServiceProvider account = postSnapshot.getValue(ServiceProvider.class);
                         DataSnapshot account1 = postSnapshot.child("Profile").child("companyName");
                         DataSnapshot account2 = postSnapshot.child("services");
+
+
                         if ((account1.getValue()==null)|| account2.getValue()==null){
                             accounts.add(account.getUsername());
                         }
@@ -132,11 +135,15 @@ public class userMenu extends Fragment {
                     e.printStackTrace();
                 }
 
-                ((WelcomeActivity) getActivity()).openDrawer();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.drawer, (Fragment) fragment)
-                        .commit();
 
+
+
+                Bundle bundle = new Bundle();
+                bundle.putString("user",item);
+                Toast.makeText(getActivity().getApplicationContext(), item, Toast.LENGTH_SHORT).show();
+                DialogFragment newFragment = new bookingDialog();
+                newFragment.setArguments(bundle);
+                newFragment.show(getActivity().getSupportFragmentManager(), "bookingDialog");
             }
         });
 

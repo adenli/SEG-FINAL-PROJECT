@@ -676,4 +676,5 @@ public class availabilityMenu extends Fragment {
 
             }
         });
+
     }}
