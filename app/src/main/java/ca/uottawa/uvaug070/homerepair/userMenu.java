@@ -70,7 +70,10 @@ public class userMenu extends Fragment {
                             for (DataSnapshot child : services.getChildren()) {
                                 Service toAdd = child.getValue(Service.class);
                                 try {
-                                    accountsDescriptions.add(account.getUsername()+"\nCompany: "+(account1.getValue().toString())+"\nServices: "+ toAdd.toString());
+                                    accountsDescriptions.add(account.getUsername()
+                                            +"\nCompany: " +(account1.getValue().toString())
+                                            +"\nServices: "+ toAdd.toString()
+                                    );
                                 } catch (NullPointerException e) {
                                     e.printStackTrace();
                                 }
