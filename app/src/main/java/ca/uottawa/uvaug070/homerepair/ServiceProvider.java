@@ -8,6 +8,9 @@ public class ServiceProvider extends Account {
     private int cumulativeRating;
     public ServiceProvider(String username, String password, Role role, String uid) {
         super(username, password, role, uid);
+        this.myProfile = new Profile();
+        numRatings = 0;
+        cumulativeRating = 0;
     }
     public ServiceProvider(){
         super();
@@ -15,6 +18,14 @@ public class ServiceProvider extends Account {
     public ServiceProvider(String username, String password, Role role, String uid,Profile myProfile) {
         super(username, password, role, uid);
         this.myProfile=myProfile;
+        numRatings = 0;
+        cumulativeRating = 0;
+    }
+    public ServiceProvider(String username, String password, Role role, String uid,Profile myProfile, int numRatings, int cumulativeRating) {
+        super(username, password, role, uid);
+        this.myProfile=myProfile;
+        this.numRatings = numRatings;
+        this.cumulativeRating = cumulativeRating;
     }
     public Profile getServiceProviderProfile(){return myProfile;}
     public void setServiceProviderProfile(Profile newProfile){this.myProfile=newProfile;}

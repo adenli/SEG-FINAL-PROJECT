@@ -73,8 +73,6 @@ public class bookingDialog extends DialogFragment {
 
 
         ListView listView = getView().findViewById(R.id.lv);
-
-        a.add("a");
         ArrayAdapter servicesAdapter = new ArrayAdapter(getActivity().getApplicationContext(), R.layout.simple_list_item_1, a);
         listView.setAdapter(servicesAdapter);
 
