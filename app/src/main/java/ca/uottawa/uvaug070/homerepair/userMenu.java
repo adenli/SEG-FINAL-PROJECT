@@ -30,8 +30,8 @@ import static android.widget.SearchView.OnQueryTextListener;
 public class userMenu extends Fragment {
 
     ArrayAdapter arrayAdapter2;
-    ArrayList<String> accounts = new ArrayList<String>();
-    ArrayList<Object> a = new ArrayList<Object>();
+    ArrayList<Account> accounts = new ArrayList<>();
+    ArrayList<String> accountsDescriptions = new ArrayList<>();
     DatabaseReference databaseServPro = FirebaseDatabase.getInstance().getReference("accounts");
     ListView servaddview;
 
@@ -50,6 +50,8 @@ public class userMenu extends Fragment {
             }
 
             public void onDataChange(DataSnapshot dataSnapshot) {
+                accounts.clear();
+                accountsDescriptions.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Account temp = postSnapshot.getValue(Account.class);
 
@@ -57,24 +59,31 @@ public class userMenu extends Fragment {
                     if (temp.getRole() == Role.SERVICEPROVIDER) {
                         ServiceProvider account = postSnapshot.getValue(ServiceProvider.class);
                         DataSnapshot account1 = postSnapshot.child("Profile").child("companyName");
-                        DataSnapshot account2 = postSnapshot.child("services");
+                        DataSnapshot services = postSnapshot.child("services");
 
 
-                        if ((account1.getValue()==null)|| account2.getValue()==null){
-                            accounts.add(account.getUsername());
+                        if (services.getValue()==null){
+                            accountsDescriptions.add(account.getUsername());
                         }
 
                         else{
-                            for (DataSnapshot child : account2.getChildren()) {
-                                a.add( child.child("name").getValue());
+                            for (DataSnapshot child : services.getChildren()) {
+                                Service toAdd = child.getValue(Service.class);
+                                accounts.add(account);
+                                try {
+                                    accountsDescriptions.add(account.getUsername()+"\nCompany: "+(account1.getValue().toString())+"\nServices: "+ toAdd.toString());
+
+                                } catch (NullPointerException e) {
+                                    e.printStackTrace();
+                                }
                             }
-                        accounts.add(account.getUsername()+"\nCompany: "+(account1.getValue().toString())+"\nServices: "+a.toString() );
+                        }
                     }
-                }}
+                }
             }
         });
 
-        ArrayAdapter arrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.simple_list_item_1, accounts);
+        ArrayAdapter arrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.simple_list_item_1, accountsDescriptions);
         servaddview.setAdapter(arrayAdapter2);
 
 
@@ -102,11 +111,11 @@ public class userMenu extends Fragment {
             public boolean onQueryTextChange(String newText) {
 
                 ArrayList<String> tempaccount = new ArrayList<String>();
-                Iterator<String> a = accounts.iterator();
+                Iterator<String> a = accountsDescriptions.iterator();
                 while (a.hasNext()){
                     String b = a.next();
 
-                    if (b.contains(newText)){
+                    if (b.toLowerCase().contains(newText.toLowerCase())){
                         tempaccount.add(b.toString());
                     }
                 }

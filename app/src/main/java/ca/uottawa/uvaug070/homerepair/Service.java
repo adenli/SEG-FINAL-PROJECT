@@ -30,4 +30,7 @@ public class Service {
     public void setUid(String uid) {
         this.uid = uid;
     }
+    public String toString() {
+        return name + " for $" + Double.toString(rate) + "/hour";
+    }
 }
