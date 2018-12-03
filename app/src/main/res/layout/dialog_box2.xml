@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/txtmessage3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Services"
+        android:textSize="16sp" />
     <ListView
         android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="207dp">
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/txtmessage2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Availability"
+        android:textSize="16sp" />
+
+    <ListView
+        android:id="@+id/timeview"
         android:layout_width="match_parent"
         android:layout_height="207dp">
 
@@ -15,20 +42,64 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="Booking:"
+        android:text="Start time:"
         android:textSize="16sp" />
 
-    <EditText
-        android:id="@+id/txtinput"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/txtinput2"
+        <EditText
+            android:id="@+id/txtinput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/txtinput2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/endtime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2" />
+        android:padding="10dp"
+        android:text="End time:"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/txtinput3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/txtinput4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/ratingtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Rating"
+        android:textSize="16sp" />
+    <Spinner
+        android:id="@+id/rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btdone"
@@ -36,5 +107,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Done" />
-
+    
 </LinearLayout>
+    </ScrollView>
