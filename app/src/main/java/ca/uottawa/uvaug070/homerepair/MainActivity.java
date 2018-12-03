@@ -123,6 +123,9 @@ public class MainActivity extends AppCompatActivity {
                 databaseAccounts.child(id).setValue(account);
                 databaseAccounts.child(id).child("Profile").setValue(null);
                 databaseAccounts.child(id).child("services").setValue(null);
+                databaseAccounts.child(id).child("numRatings").setValue(0);
+                databaseAccounts.child(id).child("cumulativeRating").setValue(0);
+
                 ((EditText)findViewById(R.id.editTextName)).setText("");
                 ((EditText)findViewById(R.id.editTextPassword)).setText("");
                 Toast.makeText(this, "Account created", Toast.LENGTH_LONG).show();

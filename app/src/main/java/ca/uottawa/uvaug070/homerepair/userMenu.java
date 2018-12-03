@@ -59,24 +59,37 @@ public class userMenu extends Fragment {
                     if (temp.getRole() == Role.SERVICEPROVIDER) {
                         ServiceProvider account = postSnapshot.getValue(ServiceProvider.class);
                         DataSnapshot account1 = postSnapshot.child("Profile").child("companyName");
+                        DataSnapshot account2 = postSnapshot.child("Profile").child("address");
+                        DataSnapshot account3 = postSnapshot.child("Profile").child("phoneNumber");
+                        DataSnapshot account4 = postSnapshot.child("Profile").child("description");
+                        DataSnapshot account5 = postSnapshot.child("Profile").child("licensed");
+                        DataSnapshot numRatings = postSnapshot.child("numRatings");
+                        DataSnapshot cumulativeRating = postSnapshot.child("cumulativeRating");
                         DataSnapshot services = postSnapshot.child("services");
-                        accounts.add(account);
 
-                        if (services.getValue()==null){
-                            accountsDescriptions.add(account.getUsername());
-                        }
-
-                        else{
+                        if (services.getValue()!=null && account1.getValue() != null){
+                            StringBuilder toAdd = new StringBuilder();
                             for (DataSnapshot child : services.getChildren()) {
-                                Service toAdd = child.getValue(Service.class);
-                                try {
-                                    accountsDescriptions.add(account.getUsername()
-                                            +"\nCompany: " +(account1.getValue().toString())
-                                            +"\nServices: "+ toAdd.toString()
-                                    );
-                                } catch (NullPointerException e) {
-                                    e.printStackTrace();
+                                toAdd.append(child.getValue(Service.class).toString() + "\n");
+                            }
+                            try {
+                                String isLicensed;
+                                if(account5.getValue().toString() == "true") {
+                                    isLicensed = "Licensed";
+                                } else {
+                                    isLicensed = "Unlicensed";
                                 }
+                                accounts.add(account);
+                                accountsDescriptions.add(account1.getValue().toString()
+                                        +"\nAddress: " +(account2.getValue().toString())
+                                        +"\nPhone Number: " +(account3.getValue().toString())
+                                        +"\nDescription: " +(account4.getValue().toString())
+                                        +"\n" + isLicensed
+                                        +"\nRating: " +((double)cumulativeRating.getValue(Integer.class) / (double)numRatings.getValue(Integer.class))
+                                        +"\nServices: \n"+ toAdd.toString()
+                                );
+                            } catch (NullPointerException e) {
+                                e.printStackTrace();
                             }
                         }
                     }
@@ -132,8 +145,6 @@ public class userMenu extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);
-
-                Toast.makeText(getActivity().getApplicationContext(), item, Toast.LENGTH_SHORT).show();
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 Object fragment = null;

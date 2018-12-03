@@ -30,6 +30,8 @@ public class bookingDialog extends DialogFragment {
     ArrayList<String> spinnerArray = new ArrayList<String>();
     DataSnapshot postSnapshot;
     ArrayList<String> times= new ArrayList<>();
+    int cumulativeRating;
+    int numRatings;
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -59,12 +61,18 @@ public class bookingDialog extends DialogFragment {
                 Spinner spin = (Spinner) view.findViewById(R.id.rating);
                 String rating = spin.getSelectedItem().toString();
                 getDialog().dismiss();
+                Bundle extras = getArguments();
+                final String extra = extras.getString("user");
+                final DatabaseReference user = FirebaseDatabase.getInstance().getReference("accounts").child(extra);
+                cumulativeRating += Integer.parseInt(rating);
+                numRatings += 1;
+                user.child("cumulativeRating").setValue(cumulativeRating);
+                user.child("numRatings").setValue(numRatings);
             }
         });
 
         return view;
     }
-
 
     public void onStart(){
         super.onStart();
@@ -72,7 +80,19 @@ public class bookingDialog extends DialogFragment {
         Bundle extras = getArguments();
         final String extra = extras.getString("user");
         final DatabaseReference database = FirebaseDatabase.getInstance().getReference("accounts").child(extra).child("services");
+        final DatabaseReference user = FirebaseDatabase.getInstance().getReference("accounts").child(extra);
+        user.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                cumulativeRating = dataSnapshot.child("cumulativeRating").getValue(Integer.class);
+                numRatings = dataSnapshot.child("numRatings").getValue(Integer.class);
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         database.addValueEventListener(new ValueEventListener() {
             @Override
