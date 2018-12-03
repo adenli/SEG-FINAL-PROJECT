@@ -52,7 +52,7 @@ public class bookingDialog extends DialogFragment {
         spin.setAdapter(spinnerArrayAdapter);
         String rating = spin.getSelectedItem().toString();
         final Button button = view.findViewById(R.id.btdone);
-
+        final Button book = view.findViewById(R.id.btdone2);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +60,6 @@ public class bookingDialog extends DialogFragment {
             public void onClick(View v) {
                 Spinner spin = (Spinner) view.findViewById(R.id.rating);
                 String rating = spin.getSelectedItem().toString();
-                getDialog().dismiss();
                 Bundle extras = getArguments();
                 final String extra = extras.getString("user");
                 final DatabaseReference user = FirebaseDatabase.getInstance().getReference("accounts").child(extra);
@@ -68,9 +67,19 @@ public class bookingDialog extends DialogFragment {
                 numRatings += 1;
                 user.child("cumulativeRating").setValue(cumulativeRating);
                 user.child("numRatings").setValue(numRatings);
+                Toast.makeText(getActivity().getApplicationContext(),"Rating submitted", Toast.LENGTH_LONG).show();
+                getDialog().dismiss();
             }
         });
 
+        book.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+                Toast.makeText(getActivity().getApplicationContext(),"Booked successfully", Toast.LENGTH_LONG).show();
+                getDialog().dismiss();
+            }
+        });
         return view;
     }
 
@@ -132,9 +141,14 @@ public class bookingDialog extends DialogFragment {
                     Object temp = snapshot.getValue();
                     times.add(temp.toString());
                 }
-                ListView listView2 = getView().findViewById(R.id.timeview);
-                ArrayAdapter servicesAdapter2 = new ArrayAdapter(getActivity().getApplicationContext(), R.layout.simple_list_item_1, times);
-                listView2.setAdapter(servicesAdapter2);
+                try{
+                    ListView listView2 = getView().findViewById(R.id.timeview);
+                    ArrayAdapter servicesAdapter2 = new ArrayAdapter(getActivity().getApplicationContext(), R.layout.simple_list_item_1, times);
+                    listView2.setAdapter(servicesAdapter2);
+                } catch(NullPointerException e) {
+                    e.printStackTrace();
+                }
+
             }
 
 

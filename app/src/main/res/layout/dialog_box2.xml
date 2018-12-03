@@ -88,7 +88,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btdone2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Book" />
+
     <TextView
         android:id="@+id/ratingtext"
         android:layout_width="match_parent"
@@ -96,17 +105,33 @@
         android:padding="10dp"
         android:text="Rating"
         android:textSize="16sp" />
+
     <Spinner
         android:id="@+id/rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/ratingtext2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Comments"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/btdone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Done" />
-    
+        android:text="Rate" />
+
 </LinearLayout>
     </ScrollView>

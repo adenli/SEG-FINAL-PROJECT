@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -66,6 +67,7 @@ public class userMenu extends Fragment {
                         DataSnapshot numRatings = postSnapshot.child("numRatings");
                         DataSnapshot cumulativeRating = postSnapshot.child("cumulativeRating");
                         DataSnapshot services = postSnapshot.child("services");
+                        DecimalFormat df = new DecimalFormat("#.#");
 
                         if (services.getValue()!=null && account1.getValue() != null){
                             StringBuilder toAdd = new StringBuilder();
@@ -85,7 +87,7 @@ public class userMenu extends Fragment {
                                         +"\nPhone Number: " +(account3.getValue().toString())
                                         +"\nDescription: " +(account4.getValue().toString())
                                         +"\n" + isLicensed
-                                        +"\nRating: " +((double)cumulativeRating.getValue(Integer.class) / (double)numRatings.getValue(Integer.class))
+                                        +"\nRating: " +df.format((double)cumulativeRating.getValue(Integer.class) / (double)numRatings.getValue(Integer.class))
                                         +"\nServices: \n"+ toAdd.toString()
                                 );
                             } catch (NullPointerException e) {
