@@ -16,3 +16,4 @@ username: admin
 password: admin
 
 GitHub: https://github.com/adenli/SEG-FINAL-PROJECT/tree/master
+CircleCi: https://circleci.com/gh/adenli
