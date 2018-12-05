@@ -81,7 +81,7 @@ public class ExampleUnitTest {
     public void checkServiceProviderAccountPassword() {
         Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
         ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
-        assertEquals("Check that the proper password is output","Walker", testServiceProvider.getPassword());
+        assertEquals("Check that the proper password is output","walker", testServiceProvider.getPassword());
     }
     @Test
     public void checkServiceProviderAccountUsername() {
