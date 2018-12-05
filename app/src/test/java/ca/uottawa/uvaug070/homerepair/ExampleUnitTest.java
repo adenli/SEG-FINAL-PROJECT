@@ -110,4 +110,24 @@ public class ExampleUnitTest {
         User testUser = new User("Simon","walker",Role.USER,"abcde");
         assertEquals("Check that the proper uid is output","abcde", testUser.getUid());
     }
+    @Test
+    public void checkTimeUid() {
+        Time testTime = new Time("abcde");
+        assertEquals("Check that the proper uid is output","abcde", testTime.getUid());
+    }
+    @Test
+    public void checkAccountPassword() {
+        Account testUser = new Account("Simon","walker",Role.ADMIN,"abcde");
+        assertEquals("Check that the proper password is output","walker", testUser.getPassword());
+    }
+    @Test
+    public void checkAccountUsername() {
+        Account testUser = new Account("Simon","walker",Role.USER,"abcde");
+        assertEquals("Check that the proper username is output","Simon", testUser.getUsername());
+    }
+    @Test
+    public void checkAccountUid() {
+        Account testUser = new Account("Simon","walker",Role.SERVICEPROVIDER,"abcde");
+        assertEquals("Check that the proper uid is output","abcde", testUser.getUid());
+    }
 }
