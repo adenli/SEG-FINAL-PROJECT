@@ -42,6 +42,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:text="Date:"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/txtinput5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/txtmessage4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text="Start time:"
         android:textSize="16sp" />
 

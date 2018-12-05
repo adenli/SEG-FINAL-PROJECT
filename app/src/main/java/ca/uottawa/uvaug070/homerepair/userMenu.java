@@ -67,6 +67,7 @@ public class userMenu extends Fragment {
                         DataSnapshot numRatings = postSnapshot.child("numRatings");
                         DataSnapshot cumulativeRating = postSnapshot.child("cumulativeRating");
                         DataSnapshot services = postSnapshot.child("services");
+                        DatabaseReference times = FirebaseDatabase.getInstance().getReference("times");
                         DecimalFormat df = new DecimalFormat("#.#");
 
                         if (services.getValue()!=null && account1.getValue() != null){
