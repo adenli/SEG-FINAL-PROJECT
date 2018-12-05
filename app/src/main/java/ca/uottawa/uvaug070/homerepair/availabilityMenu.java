@@ -44,29 +44,22 @@ public class availabilityMenu extends Fragment {
         String a= b.getString("uid");
         DatabaseReference availibilityDatabase = FirebaseDatabase.getInstance().getReference("times").child(a);
         availibilityDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                availability.clear();
 
-                                                  @Override
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String item= (String) postSnapshot.getValue();
+                    availability.add(item);
+                }
+            }
+            @Override
+             public void onCancelled(DatabaseError databaseError) {
 
-                                                  public void onDataChange(DataSnapshot dataSnapshot) {
-                                                      availability.clear();
+             }
+        });
 
-                                                      for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                                          String item= (String) postSnapshot.getValue();
-
-                                                              availability.add(item);
-
-
-                                                      }
-
-                                                  }
-
-                                                  @Override
-                                                  public void onCancelled(DatabaseError databaseError) {
-
-                                                  }
-                                              });
-
-            Spinner spin = (Spinner) view.findViewById(R.id.spinner);
+        Spinner spin = (Spinner) view.findViewById(R.id.spinner);
         Spinner spin1= view.findViewById(R.id.spinner1);
         Spinner spin2= view.findViewById(R.id.spinner2);
         Spinner spin3= view.findViewById(R.id.spinner3);

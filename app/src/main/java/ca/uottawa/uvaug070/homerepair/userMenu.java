@@ -183,11 +183,6 @@ public class userMenu extends Fragment {
 
 
 
-    }
-
-    public void onCreateOptionsMenu(Menu menu){
-
-
     }}
 
 

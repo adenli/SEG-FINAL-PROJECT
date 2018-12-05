@@ -1,5 +1,6 @@
 package ca.uottawa.uvaug070.homerepair;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,7 +36,9 @@ public class welcomeMenu extends Fragment {
         View view=inflater.inflate(R.layout.activity_welcome_menu, container, false);
         super.onCreate(savedInstanceState);
         String a = getCurrentTime(view);
+        Intent intent= getActivity().getIntent();
         tv=(TextView) view.findViewById(R.id.role_message); //add set text
+        tv.setText("Welcome " + intent.getStringExtra("username") + ", " + intent.getStringExtra("role"));
         return view;
         //this will initialize the layout of the activity servproaddserv
         // you must add the functionality of the servproaddserv here ex: pulling list from firebase etc

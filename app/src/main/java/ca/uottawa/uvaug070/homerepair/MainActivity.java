@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.View.OnKeyListener;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -50,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
         username= (EditText)findViewById(R.id.editTextName);
         password= (EditText)findViewById(R.id.editTextPassword);
-        Button b1 = (Button) findViewById(R.id.login);
+
+        final Button b1 = (Button) findViewById(R.id.login);
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
 
                 login();
 
+            }
+        });
+
+
+        password.setOnKeyListener(new OnKeyListener() {
+            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
+                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    b1.performClick();
+                    return true;
+                }
+                return false;
             }
         });
 

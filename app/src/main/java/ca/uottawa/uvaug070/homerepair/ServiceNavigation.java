@@ -147,25 +147,6 @@ public class ServiceNavigation extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 break;
-            case R.id.settings:
-                try{
-                    availabilityMenu fragment = availabilityMenu.class.newInstance();
-                    // Insert the fragment by replacing any existing fragment
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.drawer, fragment).commit();
-
-                    // Highlight the selected item has been done by NavigationView
-
-                    // Set action bar title
-                    setTitle(menuItem.getTitle());
-                    // Close the navigation drawer
-                    dl.closeDrawers();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-                break;
             case R.id.logout:
 
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
