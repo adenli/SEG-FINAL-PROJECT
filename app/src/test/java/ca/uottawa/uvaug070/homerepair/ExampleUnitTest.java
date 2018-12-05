@@ -12,18 +12,18 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
 
     @Test
-    public void checkAccountPassword() {
-        Account testAccount = new Account("simon","cat",Role.ADMIN,"abcde");
+    public void checkAdminAccountPassword() {
+        Admin testAccount = new Admin("simon","cat",Role.ADMIN,"abcde");
         assertEquals("Check that the proper password is output","cat", testAccount.getPassword());
     }
     @Test
-    public void checkAccountUsername() {
-        Account testAccount = new Account("simon","cat",Role.ADMIN,"abcde");
+    public void checkAdminAccountUsername() {
+        Admin testAccount = new Admin("simon","cat",Role.ADMIN,"abcde");
         assertEquals("Check that the proper username is output","simon", testAccount.getUsername());
     }
     @Test
-    public void checkAccountUid() {
-        Account testAccount = new Account("simon","cat",Role.ADMIN,"abcde");
+    public void checkAdminAccountUid() {
+        Admin testAccount = new Admin("simon","cat",Role.ADMIN,"abcde");
         assertEquals("Check that the proper uid is output","abcde", testAccount.getUid());
     }
     @Test
@@ -42,27 +42,92 @@ public class ExampleUnitTest {
         assertEquals("Check that the proper username is output","A2hI", testService.getUid());
     }
     @Test
-    public void checkProfileAddress(){
+    public void checkServiceProviderProfileAddress(){
         Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
         ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
         assertEquals("Check that the proper profile address is output","19 Brian Crescent", testServiceProvider.getMyProfile().getAddress());
     }
     @Test
-    public void checkProfilePhoneNum(){
+    public void checkServiceProviderProfilePhoneNum(){
         Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
         ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
         assertEquals("Check that the proper profile phone number is output","6125555555", testServiceProvider.getMyProfile().getPhoneNumber());
     }
     @Test
-    public void checkProfileCompanyName() {
+    public void checkServiceProviderProfileCompanyName() {
         Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
         ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
         assertEquals("Check that the proper profile company is output", "SegProject", testServiceProvider.getMyProfile().getCompanyName());
     }
     @Test
-    public void checkProfileDescription() {
+    public void checkServiceProviderProfileDescription() {
         Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
         ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
         assertEquals("Check that the proper profile description is output", "this is the description for the profile", testServiceProvider.getMyProfile().getDescription());
+    }
+    @Test
+    public void checkServiceProviderProfileLicence() {
+        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
+        ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
+        assertEquals("Check that the proper profile licensed is output","true",""+testServiceProvider.getMyProfile().getLicensed());
+    }
+    @Test
+    public void checkServiceProviderProfile(){
+        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
+        ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
+        assertEquals("Check that the proper profile address is output",testProfile.toString(), testServiceProvider.getMyProfile().toString());
+    }
+    @Test
+    public void checkServiceProviderAccountPassword() {
+        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
+        ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
+        assertEquals("Check that the proper password is output","walker", testServiceProvider.getPassword());
+    }
+    @Test
+    public void checkServiceProviderAccountUsername() {
+        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
+        ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
+        assertEquals("Check that the proper username is output","Simon", testServiceProvider.getUsername());
+    }
+    @Test
+    public void checkServiceProviderAccountUid() {
+        Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
+        ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
+        assertEquals("Check that the proper uid is output","abcde", testServiceProvider.getUid());
+    }
+    @Test
+    public void checkUserAccountPassword() {
+        User testUser = new User("Simon","walker",Role.USER,"abcde");
+        assertEquals("Check that the proper password is output","walker", testUser.getPassword());
+    }
+    @Test
+    public void checkUserAccountUsername() {
+        User testUser = new User("Simon","walker",Role.USER,"abcde");
+        assertEquals("Check that the proper username is output","Simon", testUser.getUsername());
+    }
+    @Test
+    public void checkUserAccountUid() {
+        User testUser = new User("Simon","walker",Role.USER,"abcde");
+        assertEquals("Check that the proper uid is output","abcde", testUser.getUid());
+    }
+    @Test
+    public void checkTimeUid() {
+        Time testTime = new Time("abcde");
+        assertEquals("Check that the proper uid is output","abcde", testTime.getUid());
+    }
+    @Test
+    public void checkAccountPassword() {
+        Account testUser = new Account("Simon","walker",Role.ADMIN,"abcde");
+        assertEquals("Check that the proper password is output","walker", testUser.getPassword());
+    }
+    @Test
+    public void checkAccountUsername() {
+        Account testUser = new Account("Simon","walker",Role.USER,"abcde");
+        assertEquals("Check that the proper username is output","Simon", testUser.getUsername());
+    }
+    @Test
+    public void checkAccountUid() {
+        Account testUser = new Account("Simon","walker",Role.SERVICEPROVIDER,"abcde");
+        assertEquals("Check that the proper uid is output","abcde", testUser.getUid());
     }
 }
