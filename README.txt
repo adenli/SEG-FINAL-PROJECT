@@ -17,4 +17,5 @@ password: admin
 
 GitHub: https://github.com/adenli/SEG-FINAL-PROJECT/tree/master
 
-Build Status [![CircleCI](https://circleci.com/gh/adenli/SEG-FINAL-PROJECT.svg?style=svg)](https://circleci.com/gh/adenli/SEG-FINAL-PROJECT)
+Build Status:
+[![CircleCI](https://circleci.com/gh/adenli/SEG-FINAL-PROJECT.svg?style=svg)](https://circleci.com/gh/adenli/SEG-FINAL-PROJECT)
