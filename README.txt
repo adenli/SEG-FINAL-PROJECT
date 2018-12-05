@@ -20,4 +20,4 @@ GitHub: https://github.com/adenli/SEG-FINAL-PROJECT/tree/master
 2
 Build Status
 3
-[![Build Status](https://circleci.com/gh/SEG2105F18/ProductCatalog.png?branch=master)](https://circleci.com/gh/SEG2105F18/ProductCatalog)
+[![Build Status](https://circleci.com/gh/adenli/SEG-FINAL-PROJECT.png?branch=master)](https://circleci.com/gh/adenli/SEG-FINAL-PROJECT)
