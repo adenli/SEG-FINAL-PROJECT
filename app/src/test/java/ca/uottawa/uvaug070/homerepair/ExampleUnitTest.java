@@ -81,13 +81,13 @@ public class ExampleUnitTest {
     public void checkServiceProviderAccountPassword() {
         Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
         ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
-        assertEquals("Check that the proper password is output","cat", testServiceProvider.getPassword());
+        assertEquals("Check that the proper password is output","Walker", testServiceProvider.getPassword());
     }
     @Test
     public void checkServiceProviderAccountUsername() {
         Profile testProfile = new Profile("SegProject","19 Brian Crescent","6125555555","this is the description for the profile",true);
         ServiceProvider testServiceProvider = new ServiceProvider("Simon","walker",Role.SERVICEPROVIDER,"abcde",testProfile);
-        assertEquals("Check that the proper username is output","simon", testServiceProvider.getUsername());
+        assertEquals("Check that the proper username is output","Simon", testServiceProvider.getUsername());
     }
     @Test
     public void checkServiceProviderAccountUid() {
@@ -98,12 +98,12 @@ public class ExampleUnitTest {
     @Test
     public void checkUserAccountPassword() {
         User testUser = new User("Simon","walker",Role.USER,"abcde");
-        assertEquals("Check that the proper password is output","cat", testUser.getPassword());
+        assertEquals("Check that the proper password is output","walker", testUser.getPassword());
     }
     @Test
     public void checkUserAccountUsername() {
         User testUser = new User("Simon","walker",Role.USER,"abcde");
-        assertEquals("Check that the proper username is output","simon", testUser.getUsername());
+        assertEquals("Check that the proper username is output","Simon", testUser.getUsername());
     }
     @Test
     public void checkUserAccountUid() {
