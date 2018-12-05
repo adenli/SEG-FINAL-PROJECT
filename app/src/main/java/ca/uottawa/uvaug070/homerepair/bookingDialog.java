@@ -36,8 +36,11 @@ public class bookingDialog extends DialogFragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.dialog_box2, container, false);
-        EditText textinput = view.findViewById(R.id.txtinput);
-        EditText textinput2 = view.findViewById(R.id.txtinput2);
+        final EditText starthour = view.findViewById(R.id.txtinput);
+        final EditText startmin = view.findViewById(R.id.txtinput2);
+        final EditText endhour = view.findViewById(R.id.txtinput3);
+        final EditText endmin = view.findViewById(R.id.txtinput4);
+        final EditText date = view.findViewById(R.id.txtinput5);
 
 
         Spinner spin = (Spinner) view.findViewById(R.id.rating);
@@ -76,8 +79,32 @@ public class bookingDialog extends DialogFragment {
             @Override
 
             public void onClick(View v) {
-                Toast.makeText(getActivity().getApplicationContext(),"Booked successfully", Toast.LENGTH_LONG).show();
-                getDialog().dismiss();
+                String day = date.getText().toString().toLowerCase();
+                Toast.makeText(getActivity().getApplicationContext(),day, Toast.LENGTH_LONG).show();
+                try{
+                    int starthr = Integer.parseInt(starthour.getText().toString());
+                    int endhr = Integer.parseInt(endhour.getText().toString());
+                    int startm = Integer.parseInt(startmin.getText().toString());
+                    int endm = Integer.parseInt(endmin.getText().toString());
+                    if(!(day.equals("monday"))&&!(day.equals("tuesday"))&&!(day.equals("wednesday"))&&!(day.equals("thursday"))&&!(day.equals("friday"))&&!(day.equals("saturday"))&&!(day.equals("sunday"))) {
+                        Toast.makeText(getActivity().getApplicationContext(),"Invalid date!", Toast.LENGTH_LONG).show();
+                    } else if (starthr > 23 || starthr < 0) {
+                        Toast.makeText(getActivity().getApplicationContext(),"Invalid start hour!", Toast.LENGTH_LONG).show();
+                    } else if (endhr > 23 || endhr < 0) {
+                        Toast.makeText(getActivity().getApplicationContext(),"Invalid end hour!", Toast.LENGTH_LONG).show();
+                    } else if (startm > 59 || startm < 0) {
+                        Toast.makeText(getActivity().getApplicationContext(),"Invalid start minute!", Toast.LENGTH_LONG).show();
+                    } else if (endm > 59 || endm < 0) {
+                        Toast.makeText(getActivity().getApplicationContext(),"Invalid end minute!", Toast.LENGTH_LONG).show();
+                    } else if (endhr < starthr || (endhr == starthr && endm < startm)) {
+                        Toast.makeText(getActivity().getApplicationContext(),"End time before start time!", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(),"Booked successfully", Toast.LENGTH_LONG).show();
+                        getDialog().dismiss();
+                    }
+                } catch(NumberFormatException e){
+                    Toast.makeText(getActivity().getApplicationContext(),"Invalid time format!", Toast.LENGTH_LONG).show();
+                }
             }
         });
         return view;
