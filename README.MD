@@ -11,9 +11,12 @@ Simon Walker (Team Lead) : 300011580
 Sana Zahid : 300014889
 
 The admin login information is: 
-
 username: admin 
 password: admin
+
+A service porvider login is: 
+username: service 
+password: service
 
 GitHub: https://github.com/adenli/SEG-FINAL-PROJECT/tree/master
 
