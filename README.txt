@@ -16,6 +16,8 @@ username: admin
 password: admin
 
 GitHub: https://github.com/adenli/SEG-FINAL-PROJECT/tree/master
+# ProductCatalog
+2
 Build Status
-[![BuildStatus](https://circleci.com/gh/adenli/SEG-FINAL-PROJECT.png?branch=master)](https://circleci.com/gh/adenli/SEG-FINAL-PROJECT)
-
+3
+[![Build Status](https://circleci.com/gh/SEG2105F18/ProductCatalog.png?branch=master)](https://circleci.com/gh/SEG2105F18/ProductCatalog)
