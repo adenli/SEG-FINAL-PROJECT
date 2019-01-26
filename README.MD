@@ -6,7 +6,7 @@ Rizvi Rab : 300007282
 
 Ulysses Vaughan : 300017065
 
-Simon Walker (Team Lead) : 300011580
+Simon Walker : 300011580
 
 Sana Zahid : 300014889
 
